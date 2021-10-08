@@ -1,0 +1,26 @@
+form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1em;
+}
+
+.to-right {
+    position: absolute;
+    text-align: right;
+    right: 0;
+    bottom: 0;
+}
+
+.center {
+    position: relative;
+    text-align: center;
+    grid-column: span 2;
+}
+
+.bg-primary {
+    border-radius: 2.5em;
+    margin: 0 0 1.5em;
+    padding: 1.5em auto;
+    width: 100%;
+    text-align: center;
+}

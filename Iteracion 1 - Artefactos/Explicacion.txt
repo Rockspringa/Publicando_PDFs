@@ -1,0 +1,7 @@
+El cambio en el diagrama de secuencia del sitema del caso CU020 porque se copio y ya no se modifico, basicamente fue como si no se hubiera creado su diagrama de secuencia.del sistema
+
+Diagramas de secuencia, no se habian agregado y son necesarios.
+
+Diagrama de Entidad Relacion se modifico porque era un boceto en el cual no se diagramaron las relaciones entre entidades en su totalidad, ademas, se cambiaron nombres para mayor entendimiento de las entidades.
+
+Mapeo fisico de DB, porque tenia que crear la base de datos para el proyecto.
