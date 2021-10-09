@@ -12,7 +12,8 @@ export class Editor extends Usuario {
     ];
 
     private readonly menu = [
-        new ClickleableOption('Mi perfil', 'profile')
+        new ClickleableOption('Mi perfil', 'profile'),
+        new ClickleableOption('Cerrar sesion', '/login')
     ];
 
     get type() { return UserType.EDITOR; }

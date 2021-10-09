@@ -24,3 +24,11 @@ form {
     width: 100%;
     text-align: center;
 }
+
+.foto {
+    padding: 3px;
+    width: 8em;
+    height: 8em;
+    border-radius: 50%;
+    margin: auto;
+}

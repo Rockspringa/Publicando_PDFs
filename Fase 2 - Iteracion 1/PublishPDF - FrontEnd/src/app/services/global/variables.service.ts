@@ -5,6 +5,8 @@ import { Injectable } from '@angular/core';
 import { Administrador } from 'src/app/model/users/admin.model';
 import { Editor } from 'src/app/model/users/editor.model';
 import { Suscriptor } from 'src/app/model/users/suscriptor.model';
+import { ButtonClasses, InputClasses } from 'src/app/model/html/form-classes.model';
+import { FormGroup } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +14,16 @@ import { Suscriptor } from 'src/app/model/users/suscriptor.model';
 export class VariablesService {
 
   constructor(private router: Router, private cookieService: CookieService) { }
+
+  setGlobalUser(data: {
+        username: string,
+        nombre: string,
+        type: string
+      }) {
+    localStorage.setItem('usuario', JSON.stringify(data));
+    this.cookieService.set('logeado', 'ok');
+    this.router.navigate(['/user/home']);
+  }
 
   getUserFromJson(dataJson: {}): Suscriptor | Editor | Administrador {
     const data = JSON.stringify(dataJson);
@@ -25,29 +37,18 @@ export class VariablesService {
 
     else if (data.includes('\"_anuncios\":'))
       user = new Administrador('', '');
-    
+
     else
       throw new Error('El string no coincide con ningun tipo de usuario.');
-    
+
     return Object.assign(user, dataJson);
   }
 
-  userLogged(dataJson: {}) {
-    const data = JSON.stringify(dataJson);
-    const user = this.getUserFromJson(dataJson);
-
-    if (data) {
-      let dataAbbr = {
-        username: user.username,
-        nombre: user.nombre,
-        type: user.type
-      };
-
-      localStorage.setItem('usuario', data);
-      this.cookieService.set('logeado', JSON.stringify(dataAbbr));
-      this.router.navigate(['/user/home']);
+  logoutUser() {
+    if (this.cookieService.check('logeado')) {
+      localStorage.removeItem('usuario');
+      this.cookieService.delete('logeado');
     }
-
   }
 
   errorInLogin(error: HttpErrorResponse) {
@@ -65,4 +66,23 @@ export class VariablesService {
     let userJson: string = localStorage.getItem('usuario') || "{}";
     return this.getUserFromJson(JSON.parse(userJson));
   }
+
+  getInputClasses(input: any): string {
+    if (input.pristine)
+      return InputClasses.DEFAULT;
+    else if (input.invalid)
+      return InputClasses.ERROR;
+    else
+      return InputClasses.VALID;
+  }
+
+  getButtonClasses(form: FormGroup): string {
+    if (form.valid)
+      return ButtonClasses.VALID;
+    else if (form.pristine)
+      return ButtonClasses.DEFAULT;
+    else
+      return ButtonClasses.ERROR;
+  }
+
 }

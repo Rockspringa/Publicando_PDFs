@@ -1,0 +1,62 @@
+<div class="container">
+    <div class="form-group">
+        <label>
+            <h1 class="title text-primary">Actualizar mi perfil</h1>
+        </label>
+        <img appUserPhoto class="form-control foto" [src]="foto" alt="Foto">
+    </div>
+    <form (ngSubmit)="updateCuenta()" [formGroup]="formUpdate">
+
+        <div class="form-group">
+            <label for="user" class="text-info">Nombre de usuario</label>
+            <input id="user" class="form-control" type="text" [value]="user.username" disabled>
+        </div>
+
+        <!-- Input de contraseña -->
+        <div class="form-group">
+            <label for="pass" class="text-info req">Confirmar Contraseña</label>
+            <input id="pass" [ngClass]="inputs(this.formUpdate.controls.password)" type="password"
+                formControlName="password" required>
+        </div>
+
+        <!-- Input de imagen -->
+        <div class="form-group">
+            <label for="foto" class="text-info">Foto de perfil</label>
+            <input id="foto" class="form-control" type="file" name="foto" (change)="changePhoto($event)">
+        </div>
+
+        <!-- Input de nombre completo -->
+        <div class="form-group">
+            <label for="name" class="text-info">Nombre Completo</label>
+            <input id="name" [ngClass]="inputs(this.formUpdate.controls.nombre)" type="text" formControlName="nombre">
+        </div>
+
+        <!-- Input de descripcion -->
+        <div class="form-group">
+            <label for="desc" class="text-info">Descripcion</label>
+            <textarea id="desc" [ngClass]="inputs(this.formUpdate.controls.descripcion)" rows="3"
+                formControlName="descripcion"></textarea>
+        </div>
+
+        <!-- Input de gustos -->
+        <div class="form-group">
+            <label for="gustos" class="text-info">Gustos</label>
+            <textarea id="gustos" [ngClass]="inputs(this.formUpdate.controls.gustos)" rows="3"
+                formControlName="gustos"></textarea>
+        </div>
+
+        <!-- Input de hobbies -->
+        <div class="form-group">
+            <label for="hobb" class="text-info">Hobbies</label>
+            <textarea id="hobb" [ngClass]="inputs(this.formUpdate.controls.hobbies)" rows="3"
+                formControlName="hobbies"></textarea>
+        </div>
+
+        <!-- Boton de submit -->
+        <div class="center">
+            <button [ngClass]="button(formUpdate)" [disabled]="formUpdate.invalid" type="submit">Actualizar
+                Informacion</button>
+        </div>
+
+    </form>
+</div>

@@ -25,6 +25,7 @@
 }
 
 .profile {
+    border-style: inset;
     cursor: pointer;
     align-self: flex-end;
     margin: auto 2em;

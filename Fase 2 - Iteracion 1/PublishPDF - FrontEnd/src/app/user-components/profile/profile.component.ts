@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Administrador } from 'src/app/model/users/admin.model';
 import { Editor } from 'src/app/model/users/editor.model';
 import { Suscriptor } from 'src/app/model/users/suscriptor.model';
+import { Usuario } from 'src/app/model/usuario.model';
 import { VariablesService } from 'src/app/services/global/variables.service';
 
 @Component({
@@ -11,13 +12,16 @@ import { VariablesService } from 'src/app/services/global/variables.service';
 })
 export class ProfileComponent implements OnInit {
 
-  editar: boolean = false;
+  readonly link: string = "/user/update";
   user!: Suscriptor | Editor | Administrador;
 
-  constructor(private variables: VariablesService) { }
+  foto!: string;
+
+  constructor(private functions: VariablesService) { }
 
   ngOnInit(): void {
-    this.user = this.variables.getUserLogged();
+    this.user = this.functions.getUserLogged();
+    this.foto = Usuario.url_foto + this.user.username + "?wildcard=1";
   }
 
 }

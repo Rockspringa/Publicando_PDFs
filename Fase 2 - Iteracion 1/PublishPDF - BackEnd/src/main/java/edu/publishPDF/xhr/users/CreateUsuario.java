@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import edu.publishPDF.database.Conexion;
-import edu.publishPDF.database.accesors.UserAccesor;
+import edu.publishPDF.database.accesors.user.UserCreator;
 import edu.publishPDF.model.errores.InvalidInputType;
 import edu.publishPDF.tools.InputReader;
 
@@ -22,14 +22,14 @@ public class CreateUsuario extends HttpServlet {
             throws ServletException, IOException {
         try (InputReader reader = new InputReader(request.getReader())) {
             String json = reader.readInput();
-            boolean output = UserAccesor.createUser(json);
+            boolean output = UserCreator.createUser(json);
 
             if (output) {
                 response.setStatus(201);
                 response.getWriter().print(json);
             }
             else
-                response.sendError(404, "No se encontro el usuario, compuebe los datos.");
+                response.sendError(404, "El nombre de usuario ya existe.");
 
         } catch (SQLException | IOException e) {
             if (e instanceof SQLException) {

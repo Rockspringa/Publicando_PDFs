@@ -1,11 +1,7 @@
-import { Administrador } from 'src/app/model/users/admin.model';
-import { Editor } from 'src/app/model/users/editor.model';
-import { Suscriptor } from 'src/app/model/users/suscriptor.model';
 import { HttpErrorResponse } from '@angular/common/http';
 import { VariablesService } from './../services/global/variables.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ButtonClasses, InputClasses } from '../model/html/form-classes.model';
 import { Usuario } from '../model/usuario.model';
 import { UsuarioService } from '../services/users/usuario.service';
 
@@ -19,11 +15,18 @@ export class LoginComponent implements OnInit {
   cargando: string = "cargando invisible";
   formLogin!: FormGroup;
 
+  inputs!: Function;
+  button!: Function;
+
   constructor(private formBuilder: FormBuilder, private usuarioService: UsuarioService,
     private functions: VariablesService) {
+      this.functions.logoutUser();
   }
 
   ngOnInit(): void {
+    this.inputs = this.functions.getInputClasses;
+    this.button = this.functions.getButtonClasses;
+
     this.formLogin = this.formBuilder.group({
       username: ['', [Validators.pattern("^[\\w ]{1,40}$"), Validators.required]],
       password: ['', [Validators.pattern("^[\\w ]{1,40}$"), Validators.required]]
@@ -34,33 +37,20 @@ export class LoginComponent implements OnInit {
     this.cargando = "cargando";
     const user = Object.assign(new Usuario('', ''), this.formLogin.value);
     this.usuarioService.logIn(user).subscribe(
-      (data: {}) => {
-        this.functions.userLogged(data)
+      (data: {
+            username: string,
+            nombre: string,
+            type: string
+          }) => {
         this.cargando = "cargando invisible";
+        this.functions.setGlobalUser(data);
       },
       (error: HttpErrorResponse) => {
         this.functions.errorInLogin(error);
         this.formLogin.reset();
+        this.cargando = "cargando invisible";
       }
     );
-  }
-
-  getClasses(input: any): string {
-    if (input.pristine)
-      return InputClasses.DEFAULT;
-    else if (input.invalid)
-      return InputClasses.ERROR;
-    else
-      return InputClasses.VALID;
-  }
-
-  getButtonClasses(): string {
-    if (this.formLogin.valid)
-      return ButtonClasses.VALID;
-    else if (this.formLogin.pristine)
-      return ButtonClasses.DEFAULT;
-    else
-      return ButtonClasses.ERROR;
   }
 
 }

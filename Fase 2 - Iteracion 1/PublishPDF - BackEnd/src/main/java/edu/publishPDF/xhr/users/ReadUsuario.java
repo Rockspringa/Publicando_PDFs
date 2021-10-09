@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import edu.publishPDF.database.accesors.UserAccesor;
+import edu.publishPDF.database.accesors.user.UserGetter;
 import edu.publishPDF.model.errores.InvalidInputType;
 import edu.publishPDF.model.errores.TooManyArgumentsException;
 import edu.publishPDF.model.users.UserType;
@@ -30,7 +30,7 @@ public class ReadUsuario extends HttpServlet {
 
         try {
             UserType type = UserType.valueOf(tipo);
-            output = UserAccesor.getUserData(username, type);
+            output = UserGetter.getUserData(username, type);
 
             if (output == null || output.equals(""))
                 response.sendError(404, "No se encontro el usuario, compuebe los datos.");
@@ -59,7 +59,7 @@ public class ReadUsuario extends HttpServlet {
         String output = null;
 
         try {
-            output = UserAccesor.getUserData(username, password);
+            output = UserGetter.getUserData(username, password);
 
             if (output == null || output.equals(""))
                 response.sendError(404, "No se encontro el usuario, compuebe los datos.");

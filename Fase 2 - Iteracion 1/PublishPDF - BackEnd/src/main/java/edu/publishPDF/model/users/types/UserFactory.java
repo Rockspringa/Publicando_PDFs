@@ -1,6 +1,5 @@
 package edu.publishPDF.model.users.types;
 
-import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,17 +33,15 @@ public class UserFactory {
      * @return una colleccion key <=> value;
      */
     public static Map<String, String> getStringAttributes(User user) {
-        Field[] fields = User.class.getDeclaredFields();
         Map<String, String> args = new HashMap<>();
 
-        for (Field field : fields) {
-            if (field.getType() == String.class) {
-                try {
-                    args.put((String) field.getName(), (String) field.get(user));
-                } catch (IllegalAccessException e) {
-                }
-            }
-        }
+        args.put("nombre_usuario", user.getUsername());
+        args.put("contraseña", user.getPassword());
+        args.put("nombre", user.getNombre());
+        args.put("descripcion", user.getDescripcion());
+        args.put("gustos", user.getGustos());
+        args.put("hobbies", user.getHobbies());
+
         return args;
     }
 

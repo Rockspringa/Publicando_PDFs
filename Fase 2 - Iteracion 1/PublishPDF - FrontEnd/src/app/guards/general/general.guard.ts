@@ -14,9 +14,11 @@ export class GeneralGuard implements CanActivate {
   constructor(private route: Router, private usuarioService: UsuarioService,
       private cookieService: CookieService, private funciones: VariablesService) { }
 
-  redirect(autorizado: boolean): void {
-    if (!autorizado)
+  redirect(autorizado: boolean, mensaje: string = ""): void {
+    if (!autorizado) {
       this.route.navigate([ '/login' ]);
+      alert(`No se pudo comprobar que hayas iniciado sesion.` + mensaje);
+    }
   }
 
   canActivate(
@@ -28,16 +30,14 @@ export class GeneralGuard implements CanActivate {
     if (existCookie) {
       autorizado = true;/*
       this.usuarioService.authenticate().subscribe(
-        data => {
-          console.log(data);
+        (value: void) => {
           this.redirect(this.cookieService.check('autorizado'));
         }, (error: HttpErrorResponse) => {
-          alert(`Error ${ error.status }: ${ error.message }`);
-          this.redirect(false);
+          this.redirect(false, `\nError ${ error.status }: ${ error.message }`);
         }
       );*/
     }
-
+    this.redirect(autorizado);
     return autorizado;
   }
 

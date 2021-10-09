@@ -6,6 +6,7 @@ import { HomeComponent } from './user-components/home/home.component';
 import { WindowComponent } from './user-components/window/window.component';
 import { ProfileComponent } from './user-components/profile/profile.component';
 import { GeneralGuard } from './guards/general/general.guard';
+import { UpdateProfileComponent } from './user-components/update-profile/update-profile.component';
 
 const routes: Routes = [
   {
@@ -14,11 +15,13 @@ const routes: Routes = [
     canActivate: [ GeneralGuard ],
     children: [
       { path: 'home', component: HomeComponent },
-      { path: 'profile', component: ProfileComponent }
+      { path: 'profile', component: ProfileComponent },
+      { path: 'update', component: UpdateProfileComponent }
     ]
   },
   { path: 'login', component: LoginComponent },
-  { path: 'sign-up', component: SignUpComponent }
+  { path: 'sign-up', component: SignUpComponent },
+  { path: '**', redirectTo: '/login' }
 ];
 
 @NgModule({

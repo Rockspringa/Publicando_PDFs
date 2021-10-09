@@ -2,54 +2,56 @@
     <div class="bg-primary">
         <h1 class="title text-white">Crear Cuenta</h1>
     </div>
+    <div class="form-group">
+        <img appUserPhoto class="form-control foto" [src]="foto" alt="Foto">
+    </div>
     <form (ngSubmit)="crearCuenta()" [formGroup]="formSignUp">
 
         <!-- Input de nombre de usuario -->
         <div class="form-group">
             <label for="user" class="text-info req">Nombre de usuario</label>
-            <input id="user" [ngClass]="getClasses(this.formSignUp.controls.username)" type="text"
+            <input id="user" [ngClass]="inputs(this.formSignUp.controls.username)" type="text"
                 formControlName="username" required>
         </div>
 
         <!-- Input de contraseña -->
         <div class="form-group">
             <label for="pass" class="text-info req">Contraseña</label>
-            <input id="pass" [ngClass]="getClasses(this.formSignUp.controls.password)" type="password"
+            <input id="pass" [ngClass]="inputs(this.formSignUp.controls.password)" type="password"
                 formControlName="password" required>
         </div>
 
         <!-- Input de nombre completo -->
         <div class="form-group">
             <label for="name" class="text-info">Nombre Completo</label>
-            <input id="name" [ngClass]="getClasses(this.formSignUp.controls.nombre)" type="text"
-                formControlName="nombre">
+            <input id="name" [ngClass]="inputs(this.formSignUp.controls.nombre)" type="text" formControlName="nombre">
         </div>
 
         <!-- Input de descripcion -->
         <div class="form-group">
             <label for="desc" class="text-info">Descripcion</label>
-            <textarea id="desc" [ngClass]="getClasses(this.formSignUp.controls.descripcion)" rows="3"
+            <textarea id="desc" [ngClass]="inputs(this.formSignUp.controls.descripcion)" rows="3"
                 formControlName="descripcion"></textarea>
         </div>
 
         <!-- Input de gustos -->
         <div class="form-group">
             <label for="gustos" class="text-info">Gustos</label>
-            <textarea id="gustos" [ngClass]="getClasses(this.formSignUp.controls.gustos)" rows="3"
+            <textarea id="gustos" [ngClass]="inputs(this.formSignUp.controls.gustos)" rows="3"
                 formControlName="gustos"></textarea>
         </div>
 
         <!-- Input de hobbies -->
         <div class="form-group">
             <label for="hobb" class="text-info">Hobbies</label>
-            <textarea id="hobb" [ngClass]="getClasses(this.formSignUp.controls.hobbies)" rows="3"
+            <textarea id="hobb" [ngClass]="inputs(this.formSignUp.controls.hobbies)" rows="3"
                 formControlName="hobbies"></textarea>
         </div>
 
-        <!-- Input de foto -->
+        <!-- Input de imagen -->
         <div class="form-group">
-            <label for="foto" class="text-info">Foto de Perfil</label>
-            <input id="foto" [ngClass]="getClasses(this.formSignUp.controls.foto)" type="file" formControlName="foto">
+            <label for="foto" class="text-info">Foto de perfil</label>
+            <input id="foto" class="form-control" type="file" name="foto" (change)="changePhoto($event)">
         </div>
 
         <!-- Input de tipo -->
@@ -57,14 +59,14 @@
             <label for="tipo" class="text-info">Tipo de Usuario</label><br>
             <select class="form-select" formControlName="tipo" required>
                 <option selected [ngValue]="null" disabled="disabled">Seleccionar opcion</option>
-                <option *ngFor="let opt of options | keyvalue" [ngValue]="opt.value">{{ opt.key }}</option>
+                <option *ngFor="let opt of options | keyvalue" [ngValue]="opt.value">{{ opt.key | titlecase }}</option>
             </select>
         </div>
 
         <!-- Boton de submit -->
         <div class="center">
-            <button [ngClass]="getButtonClasses()" [disabled]="formSignUp.invalid">Crear Cuenta</button>
-            
+            <button [ngClass]="button(formSignUp)" [disabled]="formSignUp.invalid">Crear Cuenta</button>
+
             <!-- Boton de crear cuenta -->
             <a class="to-right" routerLink="/login">-> Ya tengo cuenta</a>
         </div>

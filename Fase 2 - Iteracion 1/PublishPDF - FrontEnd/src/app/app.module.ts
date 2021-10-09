@@ -12,6 +12,8 @@ import { HomeComponent } from './user-components/home/home.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { ProfileComponent } from './user-components/profile/profile.component';
 import { CookieService } from 'ngx-cookie-service';
+import { UpdateProfileComponent } from './user-components/update-profile/update-profile.component';
+import { UserPhotoDirective } from './directives/user-photo/user-photo.directive';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import { CookieService } from 'ngx-cookie-service';
     HeaderComponent,
     WindowComponent,
     SignUpComponent,
-    ProfileComponent
+    ProfileComponent,
+    UpdateProfileComponent,
+    UserPhotoDirective
   ],
   imports: [
     BrowserModule,

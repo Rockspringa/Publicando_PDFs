@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import edu.publishPDF.database.accesors.UserAccesor;
+import edu.publishPDF.database.accesors.user.UserSetter;
 import edu.publishPDF.model.errores.InvalidInputType;
 import edu.publishPDF.tools.InputReader;
 
@@ -20,7 +20,7 @@ public class UpdateUsuario extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try (InputReader reader = new InputReader(request.getReader())) {
-            boolean output = UserAccesor.updateUser(reader.readInput());
+            boolean output = UserSetter.updateUser(reader.readInput());
 
             if (output)
                 response.setStatus(200);

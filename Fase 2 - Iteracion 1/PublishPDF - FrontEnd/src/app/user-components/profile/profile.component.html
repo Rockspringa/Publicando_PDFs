@@ -1,29 +1,29 @@
 <div class="container">
     <div class="form-group">
         <label><h1 class="title text-primary">Mi perfil</h1></label>
-        <img class="form-control foto" [src]="user.foto" alt="Foto">
+        <img appUserPhoto class="form-control foto" [src]="foto" alt="Foto">
     </div>
-    <form (ngSubmit)="updateUsuario()" [formGroup]="formUpdate" class="content text-info">
+    <div class="content text-info">
         <div class="form-group">
             <label>Nombre de usuario:</label>
             <input class="form-control" type="text" [value]="user.username" disabled>
         </div>
         <div class="form-group">
             <label>Nombre Completo:</label>
-            <input class="form-control" type="text" [value]="user.nombre" [disabled]="editar">
+            <input class="form-control" type="text" [value]="user.nombre" disabled>
         </div>
         <div class="form-group">
             <label>Descripcion:</label>
-            <input class="form-control" type="text" [value]="user.descripcion" [disabled]="editar">
+            <textarea class="form-control" rows="3" disabled>{{ user.descripcion }}</textarea>
         </div>
         <div class="form-group">
             <label>Gustos:</label>
-            <input class="form-control" type="text" [value]="user.gustos" [disabled]="editar">
+            <textarea class="form-control" rows="3" disabled>{{ user.gustos }}</textarea>
         </div>
         <div class="form-group">
             <label>Hobbies:</label>
-            <input class="form-control" type="text" [value]="user.hobbies" [disabled]="editar">
+            <textarea class="form-control" rows="3" disabled>{{ user.hobbies }}</textarea>
         </div>
-        <input [ngClass]="buttonClass" type="submit" [disabled]="form.form.invalid" [value]="buttonText">
-    </form>
+        <button [routerLink]="link" class="btn btn-info right" type="button">Modificar Perfil</button>
+    </div>
 </div>

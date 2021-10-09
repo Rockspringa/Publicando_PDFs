@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import edu.publishPDF.database.accesors.UserAccesor;
+import edu.publishPDF.database.accesors.user.UserGetter;
 import edu.publishPDF.model.users.UserType;
 
 @WebServlet(name = "AuthenticateUsuario", urlPatterns = { "/usuario/authenticate" })
@@ -22,7 +23,7 @@ public class AuthenticateUsuario extends HttpServlet {
             Cookie sessionCk = searchCookie(request.getCookies(), "logeado");
             String[] data = UserAccesor.cookieJsonToData(sessionCk.getValue());
 
-            String totalData = UserAccesor.getUserData(data[1], UserType.valueOf(data[2]));
+            String totalData = UserGetter.getUserData(data[1], UserType.valueOf(data[2]));
             if (totalData != null) {
                 Cookie outCk = new Cookie("autorizado", "ok");
                 outCk.setMaxAge(60);
@@ -44,9 +45,11 @@ public class AuthenticateUsuario extends HttpServlet {
     }
 
     private Cookie searchCookie(Cookie[] cookies, String search) {
-        for (Cookie ck : cookies) {
-            if (search.equals(ck.getName()))
-                return ck;
+        if (cookies != null) {
+            for (Cookie ck : cookies) {
+                if (search.equals(ck.getName()))
+                    return ck;
+            }
         }
         return null;
     }
