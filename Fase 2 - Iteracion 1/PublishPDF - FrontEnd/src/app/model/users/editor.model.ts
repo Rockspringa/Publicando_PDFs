@@ -7,7 +7,7 @@ export class Editor extends Usuario {
     private _revistas: string[] = [];
 
     private readonly header = [
-        new ClickleableOption('Mis Suscripciones', 'suscripciones'),
+        new ClickleableOption('Mis Revistas', 'revistas'),
         new ClickleableOption('Buscar Revistas', 'buscar')
     ];
 

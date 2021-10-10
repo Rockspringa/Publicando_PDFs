@@ -1,0 +1,13 @@
+<div class="cont">
+    <h2 class="title text-primary">Agregar un numero a la revista</h2>
+    <div class="form-group text-info">
+        <label for="file">Archivo PDF</label>
+        <input type="file" class="form-control" name="pdf" id="pdf" (change)="uploadFile($event)">
+    </div>
+
+    <!-- Boton de submit -->
+    <div class="center">
+        <button class="btn btn-primary" [disabled]="selected" (click)="publicarNumero()">Publicar Numero</button>
+    </div>
+
+</div>

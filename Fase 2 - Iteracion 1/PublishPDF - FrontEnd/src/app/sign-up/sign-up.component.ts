@@ -71,7 +71,8 @@ export class SignUpComponent implements OnInit {
           nombre: string,
           type: string
         }) => {
-          this.functions.setGlobalUser(data);
+          this.router.navigate([ '/login' ]);
+          //this.functions.setGlobalUser(data);
           this.uploadPhoto(user);
         },
       (error: HttpErrorResponse) => {
@@ -95,7 +96,7 @@ export class SignUpComponent implements OnInit {
       this.usuarioService.updatePhoto(imgData, user).subscribe(
         (data: void) => {
         }, (error: HttpErrorResponse) => {
-          alert(`No se pudo actualizar la imagen.\nError ${error.status}: ${error.statusText}`);
+          alert(`No se pudo subir la imagen.\nError ${error.status}: ${error.statusText}`);
           console.log(error);
         }
       )

@@ -38,7 +38,7 @@ export class GeneralGuard implements CanActivate {
       );*/
     }
     this.redirect(autorizado);
-    return autorizado;
+    return true;
   }
 
 }

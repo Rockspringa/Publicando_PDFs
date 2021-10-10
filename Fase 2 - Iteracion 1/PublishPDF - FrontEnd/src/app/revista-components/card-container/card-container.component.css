@@ -1,0 +1,8 @@
+.cont {
+    width: 80%;
+    height: fit-content;
+    padding: 3em auto;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}

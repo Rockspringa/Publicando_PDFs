@@ -11,7 +11,7 @@ import { Observable } from 'rxjs';
 })
 export class UsuarioService {
 
-  readonly serverUrl = "http://localhost:8080/PublishPDF/usuario"
+  readonly serverUrl = "http://localhost:8080/PublishPDF/usuario";
 
   constructor(private http: HttpClient) { }
 

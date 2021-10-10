@@ -1,0 +1,24 @@
+.invisible {
+    position: absolute;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: row;
+}
+
+.form-group > label {
+    width: 40%;
+}
+
+.center {
+    text-align: center;
+}
+
+.container {
+    position: relative;
+}
+
+.hid {
+    display: none;
+}

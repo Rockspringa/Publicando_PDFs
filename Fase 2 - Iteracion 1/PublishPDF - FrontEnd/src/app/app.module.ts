@@ -14,6 +14,12 @@ import { ProfileComponent } from './user-components/profile/profile.component';
 import { CookieService } from 'ngx-cookie-service';
 import { UpdateProfileComponent } from './user-components/update-profile/update-profile.component';
 import { UserPhotoDirective } from './directives/user-photo/user-photo.directive';
+import { PdfCardComponent } from './revista-components/pdf-card/pdf-card.component';
+import { BuscarPdfComponent } from './revista-components/buscar-pdf/buscar-pdf.component';
+import { CardContainerComponent } from './revista-components/card-container/card-container.component';
+import { RevistaFormComponent } from './revista-components/revista-form/revista-form.component';
+import { RevistasViewComponent } from './revista-components/revistas-view/revistas-view.component';
+import { NumeroFormComponent } from './revista-components/numero-form/numero-form.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +31,13 @@ import { UserPhotoDirective } from './directives/user-photo/user-photo.directive
     SignUpComponent,
     ProfileComponent,
     UpdateProfileComponent,
-    UserPhotoDirective
+    UserPhotoDirective,
+    PdfCardComponent,
+    BuscarPdfComponent,
+    CardContainerComponent,
+    RevistaFormComponent,
+    RevistasViewComponent,
+    NumeroFormComponent
   ],
   imports: [
     BrowserModule,

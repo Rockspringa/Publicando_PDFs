@@ -1,0 +1,11 @@
+a {
+    display: block;
+    width: fit-content;
+    height: fit-content;
+    margin: 2em 15% 2em auto;
+    padding: 1em 2em;
+    background-color: white;
+    text-decoration: none;
+    border: 1px solid lightgray;
+    border-radius: 3px;
+}
