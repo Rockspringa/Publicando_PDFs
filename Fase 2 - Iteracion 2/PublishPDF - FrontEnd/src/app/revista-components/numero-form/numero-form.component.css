@@ -1,0 +1,28 @@
+.cont {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 2em;
+    background-color: seashell;
+    border: 1px solid blue;
+    border-radius: 3px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: row;
+    height: 60%;
+    padding: 10em auto;
+}
+
+.form-group > label {
+    width: 40%;
+}
+
+.center {
+    text-align: center;
+}

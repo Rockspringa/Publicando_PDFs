@@ -1,0 +1,34 @@
+.form-group * {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: row;
+}
+
+.form-group > label {
+    width: 30%;
+}
+
+h1 {
+    font-size: 4em;
+}
+
+.container > .form-group > label {
+    width: 75%;
+}
+
+.foto {
+    padding: 3px;
+    width: 8em;
+    height: 8em;
+    border-radius: 50%;
+    margin-left: auto;
+    margin-right: 0;
+}
+
+.center {
+    text-align: center;
+}

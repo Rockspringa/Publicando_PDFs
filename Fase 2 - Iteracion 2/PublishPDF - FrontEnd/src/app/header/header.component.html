@@ -1,0 +1,15 @@
+<div class="header">
+    <div class="options">
+        <a class="home title" [routerLink]="link">
+            <h1>PublishPDF</h1>
+        </a>
+        <a class="opt" [routerLink]="opt.link" *ngFor="let opt of headOpts">{{ opt.title }}</a>
+        <div class="dropdown">
+            <a class="profile dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false">Perfil</a>
+            <div class="dropdown-menu" aria-labelledby="my-dropdown">
+                <a class="dropdown-item active" [routerLink]="opt.link" *ngFor="let opt of profOpts">{{ opt.title }}</a>
+            </div>
+        </div>
+    </div>
+</div>

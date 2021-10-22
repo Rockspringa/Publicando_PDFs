@@ -1,0 +1,27 @@
+.card {
+    min-width: 16em;
+    width: 30em;
+    height: fit-content;
+    margin: 10% auto 0 auto;
+    background-color: seashell;
+    border: 2px solid dodgerblue;
+}
+
+.to-right {
+    margin: 1em auto auto auto;
+    text-align: right;
+}
+
+.center {
+    text-align: center;
+}
+
+.cargando {
+    position: absolute;
+    font-size: 3.5em;
+    width: 100%;
+    top: 42%;
+    font-weight: bolder;
+    text-align: center;
+    opacity: 0.8;
+}

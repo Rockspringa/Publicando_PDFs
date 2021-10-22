@@ -1,0 +1,34 @@
+<div class="card">
+    <div class="card-body">
+        <h1 class="card-title title text-primary">Inicio de Sesion</h1>
+        <form (ngSubmit)="iniciarSesion()" [formGroup]="formLogin">
+
+            <!-- Input de nombre de usuario -->
+            <div class="form-group">
+                <label for="user" class="text-info req">Nombre de usuario</label>
+                <input id="user" [ngClass]="inputs(this.formLogin.controls.username)" type="text"
+                    formControlName="username">
+            </div>
+
+            <!-- Input de contraseña -->
+            <div class="form-group">
+                <label for="pass" class="text-info req">Contraseña</label>
+                <input id="pass" [ngClass]="inputs(this.formLogin.controls.password)" type="password"
+                    formControlName="password">
+            </div>
+
+            <!-- Boton de submit -->
+            <div class="center">
+                <button [ngClass]="button(this.formLogin)" [disabled]="formLogin.invalid">Iniciar Sesion</button>
+            </div>
+
+            <!-- Boton de crear cuenta -->
+            <div class="to-right">
+                <a routerLink="/sign-up">-> Crear cuenta</a>
+            </div>
+        </form>
+    </div>
+    <div [ngClass]="cargando">
+        Cargando...
+    </div>
+</div>
