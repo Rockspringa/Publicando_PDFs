@@ -1,0 +1,25 @@
+<div class="cont">
+    <h1 class="title bg-primary text-white">{{ revista.nombre }}</h1>
+    <div class="wrapper" *ngIf="revista.descripcion != undefined">
+        <iframe src="" frameborder="1"></iframe>
+        <div class="numbers">
+            <a href="#" class="number" *ngFor="let i of indexes">i</a>
+        </div>
+    </div>
+
+    <div class="wrapper">
+        <div class="mini-data">
+            <p class="izq"><b>Editor:</b> {{ revista.editor }}</p>
+            <button *ngIf="revista.descripcion != undefined" class="der btn btn-secondary">A {{ revista.meGustas }}
+                personas les gusta.</button>
+            <p *ngIf="revista.descripcion == undefined" class="der">A {{ revista.meGustas }} personas les gusta.</p>
+            <p class="izq"><b>Categoria:</b> {{ revista.categoria }}</p>
+        </div>
+        <b>Descripcion</b>
+        <div class="text bg-white">{{ revista.descripcion }}</div>
+        <div class="tags">
+            <b>Etiquetas: </b><br>
+            <span *ngFor="let tag of revista.etiquetas" class="badge badge-pill badge-dark">{{ tag }}</span>
+        </div>
+    </div>
+</div>

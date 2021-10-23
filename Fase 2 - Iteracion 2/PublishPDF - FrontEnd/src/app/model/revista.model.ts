@@ -5,6 +5,9 @@ export interface Revista {
     categoria: string;
     fechaPublicacion: Date;
     descripcion?: string;
+    numeros?: number;
+    etiquetas?: [];
+    meGustas?: number;
     
     comentariosActivos?: boolean;
     meGustasActivos?: boolean;

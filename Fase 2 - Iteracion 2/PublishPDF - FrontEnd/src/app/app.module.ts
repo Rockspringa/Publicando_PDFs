@@ -19,6 +19,7 @@ import { CardContainerComponent } from './revista-components/card-container/card
 import { RevistaFormComponent } from './revista-components/revista-form/revista-form.component';
 import { RevistasViewComponent } from './revista-components/revistas-view/revistas-view.component';
 import { NumeroFormComponent } from './revista-components/numero-form/numero-form.component';
+import { RevistaComponent } from './revista-components/revista/revista.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { NumeroFormComponent } from './revista-components/numero-form/numero-for
     CardContainerComponent,
     RevistaFormComponent,
     RevistasViewComponent,
-    NumeroFormComponent
+    NumeroFormComponent,
+    RevistaComponent
   ],
   imports: [
     BrowserModule,

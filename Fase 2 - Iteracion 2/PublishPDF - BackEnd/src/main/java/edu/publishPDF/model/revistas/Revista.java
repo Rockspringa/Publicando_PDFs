@@ -13,7 +13,10 @@ public class Revista {
     private final LocalDate fechaPublicacion;
     private final String nombre;
     private final String categoria;
+    private int numeros;
+    private int meGustas;
     private String descripcion;
+    private String[] etiquetas;
     private boolean comentariosActivos = true;
     private boolean meGustasActivos = true;
     private boolean suscripcionesActivas = true;
@@ -152,5 +155,30 @@ public class Revista {
     public void setSuscripcionesActivas(boolean suscripcionesActivas) {
         this.suscripcionesActivas = suscripcionesActivas;
     }
+
+    public int getNumeros() {
+        return numeros;
+    }
+
+    public void setNumeros(int numeros) {
+        this.numeros = numeros;
+    }
+
+    public int getMeGustas() {
+        return meGustas;
+    }
+
+    public void setMeGustas(int meGustas) {
+        this.meGustas = meGustas;
+    }
+
+    public String[] getEtiquetas() {
+        return etiquetas;
+    }
+
+    public void setEtiquetas(String[] etiquetas) {
+        this.etiquetas = etiquetas;
+    }
+    
 
 }

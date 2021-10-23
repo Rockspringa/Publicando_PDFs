@@ -187,8 +187,17 @@ INSERT INTO EDITOR VALUES ('tmp_edi');
 INSERT INTO ADMINISTRADOR VALUES ('tmp_adm');
 
 INSERT INTO CATEGORIA VALUES ('Cientifica'), ('Relatos'), ('Comic');
-INSERT INTO REVISTA (editor, nombre, fecha_publicada, categoria) VALUES ('tmp_edi', 'Investigacion...', '2021-10-22', 'Cientifica'),
-	('tmp_edi', 'Cuentos del hoy', '2021-09-28', 'Relatos'), ('tmp_edi', 'Ultimate Spiderman', '2021-07-10', 'Comic'),
-    ('tmp_edi', 'Batman V Superman', '2021-08-16', 'Comic');
+INSERT INTO REVISTA (editor, nombre, fecha_publicada, categoria, descripcion)
+	VALUES ('tmp_edi', 'Investigacion...', '2021-10-22', 'Cientifica', 'Investigacion sobre muchas cosas cientificas.'),
+	('tmp_edi', 'Cuentos del hoy', '2021-09-28', 'Relatos', 'Revista en la cual se publican distintos cuentos actuales.'),
+    ('tmp_edi', 'Ultimate Spiderman', '2021-07-10', 'Comic', 'Comic del superheroe spiderman.'),
+    ('tmp_edi', 'Batman V Superman', '2021-08-16', 'Comic', 'Comic de DC.');
     
 INSERT INTO SUSCRIPCIONES VALUES (3, 'tmp_sus', '2021-10-10', 1), (4, 'tmp_sus', '2021-10-10', 1);
+
+INSERT INTO ETIQUETA VALUES ('Spiderman'), ('Cuentos'), ('Ciencia'), ('Matematica'), ('Fisica'), ('Relato'), ('Accion'),
+	('Drama'), ('Ficcion'), ('Ciencia Ficcion'), ('Marvel'), ('DC');
+    
+INSERT INTO ETIQUETAS_REVISTA VALUES (1, 'Ciencia'), (1, 'Matematica'), (1, 'Fisica'), (2, 'Relato'), (2, 'Drama'),
+	(2, 'Cuentos'), (2, 'Ficcion'), (2, 'Ciencia Ficcion'), (3, 'Accion'), (3, 'Ciencia Ficcion'), (3, 'Marvel'),
+    (3, 'Spiderman'), (3, 'Ficcion'), (4, 'DC'), (4, 'Accion'), (4, 'Ciencia Ficcion'), (4, 'Ficcion');

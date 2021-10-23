@@ -1,3 +1,4 @@
+import { RevistaComponent } from './revista-components/revista/revista.component';
 import { RevistasViewComponent } from './revista-components/revistas-view/revistas-view.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { NgModule } from '@angular/core';
@@ -29,8 +30,8 @@ const routes: Routes = [
     canActivate: [ GeneralGuard ],
     canActivateChild: [ TypeGuard ],
     children: [
-      { path: 'suscripciones', component: RevistasViewComponent }, // modificar
-      { path: 'revista/:id', component: RevistaFormComponent } // modificar
+      { path: 'suscripciones', component: RevistasViewComponent },
+      { path: 'revista/:id', component: RevistaComponent }
     ]
   }, {
     path: 'editor',

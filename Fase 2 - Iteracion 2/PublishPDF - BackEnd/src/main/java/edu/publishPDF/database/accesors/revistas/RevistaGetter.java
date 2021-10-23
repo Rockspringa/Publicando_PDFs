@@ -24,6 +24,42 @@ public class RevistaGetter extends AccesorTools {
     private static final String REVISTA_SUSCRITO = "SELECT revista, editor, fecha_publicada, nombre, categoria,"
             + " descripcion, comentarios_activos, me_gusta_activos, suscripciones_activas FROM "
             + "SUSCRIPCIONES JOIN REVISTA ON revista = revista_id WHERE suscriptor = ? AND revista = ?";
+    
+    private static final String ME_GUSTAS_REVISTA = "SELECT COUNT(*) FROM ME_GUSTAS WHERE revista = ?";
+    
+    private static final String CANT_NUMEROS_REVISTA = "SELECT COUNT(*) FROM NUMERO_REVISTA WHERE revista = ?";
+    
+    private static final String ETIQUETAS_REVISTA = "SELECT etiqueta FROM ETIQUETAS_REVISTA WHERE revista = ?";
+
+    private static int getCantEtcDeRevista(int revistaId, String query) throws InvalidInputType, SQLException {
+        int out = -1;
+
+        PreparedStatement stmt = Conexion.getPrepareStatement(query);
+
+        stmt.setInt(1, revistaId);
+
+        ResultSet res = stmt.executeQuery();
+
+        if (res.next())
+            out = res.getInt(1);
+
+        return out;
+    }
+
+    private static String[] getEtiquetasDeRevista(int revistaId) throws SQLException {
+        List<String> tags = new ArrayList<>();
+
+        PreparedStatement stmt = Conexion.getPrepareStatement(ETIQUETAS_REVISTA);
+
+        stmt.setInt(1, revistaId);
+
+        ResultSet res = stmt.executeQuery();
+
+        while (res.next())
+            tags.add(res.getString(1));
+
+        return tags.toArray(new String[0]);
+    }
 
     public static String getRevistasSuscriptas(String username)
             throws SQLException, InvalidInputType, TooManyArgumentsException {
@@ -55,7 +91,8 @@ public class RevistaGetter extends AccesorTools {
     }
 
     public static String getRevistaFromSuscripcion(String json) throws InvalidInputType, SQLException {
-        Suscripcion suscripcion = GSON.fromJson(json, Suscripcion.class);
+        Revista revista = null;
+        Suscripcion suscripcion = GSON_FOR_DATE.fromJson(json, Suscripcion.class);
         suscripcion = Suscripcion.createSuscripcion(suscripcion.getRevista(), suscripcion.getSuscriptor(),
                 suscripcion.getFechaSuscripcion(), suscripcion.isMensual()); // validacion de campos
 
@@ -76,18 +113,23 @@ public class RevistaGetter extends AccesorTools {
             String categoria = res.getString(5);
             String descripcion = res.getString(6);
             boolean comentariosActivos = res.getBoolean(7);
+            comentariosActivos = (res.wasNull()) ? true : comentariosActivos;
             boolean meGustasActivos = res.getBoolean(8);
+            meGustasActivos = (res.wasNull()) ? true : meGustasActivos;
             boolean suscripcionesActivas = res.getBoolean(9);
+            suscripcionesActivas = (res.wasNull()) ? true : suscripcionesActivas;
 
-            Conexion.closeSession();
+            revista = Revista.createRevista(id, editor, fechaPublicacion, nombre, categoria, descripcion,
+                    comentariosActivos, meGustasActivos, suscripcionesActivas);
 
-            return GSON.toJson(Revista.createRevista(id, editor, fechaPublicacion, nombre, categoria, descripcion,
-                    comentariosActivos, meGustasActivos, suscripcionesActivas));
+            revista.setMeGustas(getCantEtcDeRevista(revista.getId(), ME_GUSTAS_REVISTA));
+            revista.setNumeros(getCantEtcDeRevista(revista.getId(), CANT_NUMEROS_REVISTA));
+            revista.setEtiquetas(getEtiquetasDeRevista(revista.getId()));
         }
 
         Conexion.closeSession();
 
-        return null;
+        return (revista != null) ? GSON_FOR_DATE.toJson(revista) : null;
     }
 
 }
