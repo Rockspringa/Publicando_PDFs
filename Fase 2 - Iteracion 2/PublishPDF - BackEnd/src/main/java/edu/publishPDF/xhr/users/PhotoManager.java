@@ -21,8 +21,8 @@ import edu.publishPDF.model.errores.TooManyArgumentsException;
 import edu.publishPDF.tools.filesTools.FilePasser;
 
 @MultipartConfig()
-@WebServlet(name = "UploadFile", urlPatterns = { "/usuario/archivos/*" })
-public class FileManager extends HttpServlet {
+@WebServlet(name = "UploadFile", urlPatterns = { "/usuario/photo/*" })
+public class PhotoManager extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -61,14 +61,15 @@ public class FileManager extends HttpServlet {
 
         try {
             FilePasser creator = new FilePasser(root, partFile, userData);
-            if (creator.passFile()) {
-                if (creator.getType().equals("IMG"))
+            if (userData.split("/").length == 2 && creator.getType().equals("IMG")) {
+                if (creator.passFile()) {
                     UserSetter.updatePhoto(creator.getUsername(), creator.getPath());
+                    response.setStatus(200);
+                }
                 /*else
                     UserAccesor.uploadFile(creator.getUsername(), partFile.getName());*/
-
-                response.setStatus(200);
-            }
+            } else 
+                response.sendError(400, "El archivo enviado no es de tipo imagen.");
         } catch (InvalidInputType | IllegalStateException | NullPointerException |
                     TooManyArgumentsException e) {
             response.sendError(400, e.getMessage());

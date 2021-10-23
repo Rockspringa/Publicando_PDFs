@@ -11,7 +11,6 @@ import { WindowComponent } from './user-components/window/window.component';
 import { HomeComponent } from './user-components/home/home.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { ProfileComponent } from './user-components/profile/profile.component';
-import { CookieService } from 'ngx-cookie-service';
 import { UpdateProfileComponent } from './user-components/update-profile/update-profile.component';
 import { UserPhotoDirective } from './directives/user-photo/user-photo.directive';
 import { PdfCardComponent } from './revista-components/pdf-card/pdf-card.component';
@@ -45,7 +44,7 @@ import { NumeroFormComponent } from './revista-components/numero-form/numero-for
     AppRoutingModule,
     ReactiveFormsModule
   ],
-  providers: [CookieService],
+  providers: [ ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

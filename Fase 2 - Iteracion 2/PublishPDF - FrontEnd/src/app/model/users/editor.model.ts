@@ -7,8 +7,8 @@ export class Editor extends Usuario {
     private _revistas: string[] = [];
 
     private readonly header = [
-        new ClickleableOption('Mis Revistas', 'revistas'),
-        new ClickleableOption('Buscar Revistas', 'buscar')
+        new ClickleableOption('Mis Revistas', '/editor/revistas'),
+        new ClickleableOption('Buscar Revistas', '/user/buscar')
     ];
 
     private readonly menu = [

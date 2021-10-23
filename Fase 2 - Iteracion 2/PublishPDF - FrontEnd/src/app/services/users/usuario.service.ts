@@ -27,11 +27,11 @@ export class UsuarioService {
     }
   }
 
-  public findOne(data: Suscriptor | Editor | Administrador): Observable<{}> {
+  findOne(data: Suscriptor | Editor | Administrador): Observable<{}> {
     return this.http.get<{}>(`${this.serverUrl}/read`, this.doTwoParams(data));
   }
 
-  public logIn(data: Usuario): Observable<{
+  logIn(data: Usuario): Observable<{
         username: string,
         nombre: string,
         type: string
@@ -43,11 +43,11 @@ export class UsuarioService {
       }>(`${this.serverUrl}/read`, null, this.doTwoParams(data));
   }
 
-  public authenticate(): Observable<void> {
+  authenticate(): Observable<void> {
     return this.http.post<void>(`${this.serverUrl}/authenticate`, null, this.doTwoParams(null));
   }
 
-  public create(data: Suscriptor | Editor | Administrador): Observable<{
+  create(data: Suscriptor | Editor | Administrador): Observable<{
         username: string,
         nombre: string,
         type: string
@@ -59,16 +59,16 @@ export class UsuarioService {
       }>(this.serverUrl, data);
   }
 
-  public patch(data: Suscriptor | Editor | Administrador): Observable<void> {
+  patch(data: Suscriptor | Editor | Administrador): Observable<void> {
     return this.http.post<void>(`${this.serverUrl}/`, data);
   }
 
-  public updatePhoto(data: FormData, user: Suscriptor | Editor | Administrador): Observable<void> {
-    return this.http.post<void>(`${this.serverUrl}/archivos/${user.username}`, data);
+  updatePhoto(data: FormData, user: Suscriptor | Editor | Administrador): Observable<void> {
+    return this.http.post<void>(`${this.serverUrl}/photo/${user.username}`, data);
   }
 
-  public getPhoto(user: Suscriptor | Editor | Administrador): Observable<any> {
-    return this.http.get<any>(`${this.serverUrl}/archivos/${user.username}`, this.doTwoParams(null));
+  getPhoto(user: Suscriptor | Editor | Administrador): Observable<any> {
+    return this.http.get<any>(`${this.serverUrl}/photo/${user.username}`, this.doTwoParams(null));
   }
 
 }

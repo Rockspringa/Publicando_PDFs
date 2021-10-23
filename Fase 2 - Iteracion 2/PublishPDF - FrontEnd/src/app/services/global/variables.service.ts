@@ -1,4 +1,3 @@
-import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -13,7 +12,7 @@ import { FormGroup } from '@angular/forms';
 })
 export class VariablesService {
 
-  constructor(private router: Router, private cookieService: CookieService) { }
+  constructor(private router: Router) { }
 
   setGlobalUser(data: {
         username: string,
@@ -21,7 +20,6 @@ export class VariablesService {
         type: string
       }) {
     localStorage.setItem('usuario', JSON.stringify(data));
-    this.cookieService.set('logeado', 'ok');
     this.router.navigate(['/user/home']);
   }
 
@@ -45,9 +43,8 @@ export class VariablesService {
   }
 
   logoutUser() {
-    if (this.cookieService.check('logeado')) {
+    if (localStorage.getItem('usuario')) {
       localStorage.removeItem('usuario');
-      this.cookieService.delete('logeado');
     }
   }
 

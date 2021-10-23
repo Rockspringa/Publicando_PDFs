@@ -1,2 +1,4 @@
-<a [routerLink]="link">Crear Revista</a>
-<app-card-container></app-card-container>
+<div class="cont">
+    <a [routerLink]="link" *ngIf="isEditor(user)">Crear Revista</a>
+    <app-card-container [revistas]="revistas"></app-card-container>
+</div>

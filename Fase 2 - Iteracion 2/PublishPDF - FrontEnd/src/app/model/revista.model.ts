@@ -1,8 +1,12 @@
 export interface Revista {
     id: number;
-    fecha: Date;
     editor: string;
     nombre: string;
     categoria: string;
+    fechaPublicacion: Date;
     descripcion?: string;
+    
+    comentariosActivos?: boolean;
+    meGustasActivos?: boolean;
+    suscripcionesActivas?: boolean;
 }

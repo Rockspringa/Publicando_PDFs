@@ -4,8 +4,25 @@ img {
 }
 
 .card {
-    width: 14em;
+    width: 100%;
+    min-width: 14em;
     height: fit-content;
     text-align: center;
     cursor: pointer;
+    margin: auto;
+}
+
+.card-body {
+    height: 6.5em;
+}
+
+.card-title {
+    height: 1.5em;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+h6 {
+    font-size: small;
 }

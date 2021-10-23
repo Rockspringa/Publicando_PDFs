@@ -1,9 +1,10 @@
 <div class="card">
     <div class="card-body">
-        <h5 class="card-title title">{{ revista.nombre }}</h5>
-        <p class="card-text">de: {{ revista.editor }}</p>
+        <h4 class="card-title title">{{ revista.nombre }}</h4>
+        <h6 class="card-text">de: {{ revista.editor }}</h6>
     </div>
     <div class="card-footer">
-        {{ revista.fecha | date : 'shortDate' }}
+        <p>Categoria: '{{ revista.categoria }}'</p>
+        <h6>{{ revista.fechaPublicacion | date : 'dd/MM/yyyy' }}</h6>
     </div>
 </div>

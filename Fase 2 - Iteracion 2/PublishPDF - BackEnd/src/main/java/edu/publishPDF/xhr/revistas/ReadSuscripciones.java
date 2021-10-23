@@ -32,6 +32,8 @@ public class ReadSuscripciones extends HttpServlet {
             response.sendError(400, e.getMessage());
         } catch (NullPointerException e) {
             response.sendError(400, "No se encontro nada, esta nulo.");
+        } catch (IOException e) {
+            response.sendError(400, e.getMessage());
         }
     }
 

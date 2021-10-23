@@ -8,7 +8,7 @@ export class Administrador extends Usuario {
 
     private readonly header = [
         new ClickleableOption('Mis Suscripciones', 'suscripciones'),
-        new ClickleableOption('Buscar Revistas', 'buscar')
+        new ClickleableOption('Buscar Revistas', '/user/buscar')
     ];
 
     private readonly menu = [

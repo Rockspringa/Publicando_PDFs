@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 })
 export class RevistasService {
 
-  readonly uplFile = "http://localhost:8080/PublishPDF/usuario";
+  readonly uplFile = "http://localhost:8080/PublishPDF/usuario"; // arreglar
   readonly serverUrl = "http://localhost:8080/PublishPDF/revistas";
 
   constructor(private http: HttpClient) { }
@@ -18,7 +18,7 @@ export class RevistasService {
     return this.http.post<Revista>(this.serverUrl, revista);
   }
 
-  public postFile(data: FormData, user: Editor, revista: Revista): Observable<void> {
+  postFile(data: FormData, user: Editor, revista: Revista): Observable<void> {
     return this.http.post<void>(`${this.uplFile}/archivos/${user.username}/${revista.nombre}`, data);
   }
 

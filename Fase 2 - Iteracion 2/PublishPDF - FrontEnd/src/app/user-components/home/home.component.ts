@@ -12,12 +12,16 @@ import { Component, OnInit } from '@angular/core';
 export class HomeComponent implements OnInit {
 
   user!: Suscriptor | Editor | Administrador;
+  rec: string = "invisible";
 
   constructor(private variables: VariablesService) {
   }
 
   ngOnInit(): void {
     this.user = this.variables.getUserLogged();
+    if (this.user instanceof Suscriptor) {
+      this.rec = "container";
+    }
   }
 
 }

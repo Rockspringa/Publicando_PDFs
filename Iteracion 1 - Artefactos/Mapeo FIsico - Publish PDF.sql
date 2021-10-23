@@ -2,9 +2,9 @@ DROP DATABASE IF EXISTS PUBLISH_PDF;
 CREATE DATABASE PUBLISH_PDF;
 USE PUBLISH_PDF;
 
--- CREATE USER IF NOT EXISTS 'admin_publish-pdf'@'localhost' IDENTIFIED BY 'nimda';
--- GRANT ALL PRIVILEGES ON PUBLISH_PDF.* TO 'admin_publish-pdf'@'localhost' WITH GRANT OPTION;
--- FLUSH PRIVILEGES;
+CREATE USER IF NOT EXISTS 'admin_publish-pdf'@'localhost' IDENTIFIED BY 'nimda';
+GRANT ALL PRIVILEGES ON PUBLISH_PDF.* TO 'admin_publish-pdf'@'localhost' WITH GRANT OPTION;
+FLUSH PRIVILEGES;
 
 CREATE TABLE USUARIO (
     nombre_usuario VARCHAR(40),
@@ -185,3 +185,10 @@ INSERT INTO USUARIO VALUES ('tmp_sus', 'tmp', 'suscriptor', 'descripcion', 'gust
 INSERT INTO SUSCRIPTOR VALUES ('tmp_sus');
 INSERT INTO EDITOR VALUES ('tmp_edi');
 INSERT INTO ADMINISTRADOR VALUES ('tmp_adm');
+
+INSERT INTO CATEGORIA VALUES ('Cientifica'), ('Relatos'), ('Comic');
+INSERT INTO REVISTA (editor, nombre, fecha_publicada, categoria) VALUES ('tmp_edi', 'Investigacion...', '2021-10-22', 'Cientifica'),
+	('tmp_edi', 'Cuentos del hoy', '2021-09-28', 'Relatos'), ('tmp_edi', 'Ultimate Spiderman', '2021-07-10', 'Comic'),
+    ('tmp_edi', 'Batman V Superman', '2021-08-16', 'Comic');
+    
+INSERT INTO SUSCRIPCIONES VALUES (3, 'tmp_sus', '2021-10-10', 1), (4, 'tmp_sus', '2021-10-10', 1);

@@ -71,8 +71,7 @@ export class SignUpComponent implements OnInit {
           nombre: string,
           type: string
         }) => {
-          this.router.navigate([ '/login' ]);
-          //this.functions.setGlobalUser(data);
+          this.functions.setGlobalUser(data);
           this.uploadPhoto(user);
         },
       (error: HttpErrorResponse) => {

@@ -7,8 +7,8 @@ export class Suscriptor extends Usuario {
     private _tags: string[] = [];
 
     private readonly header = [
-        new ClickleableOption('Mis Suscripciones', 'suscripciones'),
-        new ClickleableOption('Buscar Revistas', 'buscar')
+        new ClickleableOption('Mis Suscripciones', '/suscriptor/suscripciones'),
+        new ClickleableOption('Buscar Revistas', '/user/buscar')
     ];
 
     private readonly menu = [

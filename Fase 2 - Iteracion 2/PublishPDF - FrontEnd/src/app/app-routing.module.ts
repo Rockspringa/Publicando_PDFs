@@ -10,6 +10,7 @@ import { GeneralGuard } from './guards/general/general.guard';
 import { UpdateProfileComponent } from './user-components/update-profile/update-profile.component';
 import { BuscarPdfComponent } from './revista-components/buscar-pdf/buscar-pdf.component';
 import { RevistaFormComponent } from './revista-components/revista-form/revista-form.component';
+import { TypeGuard } from './guards/type/type.guard';
 
 const routes: Routes = [
   {
@@ -20,7 +21,23 @@ const routes: Routes = [
       { path: 'home', component: HomeComponent },
       { path: 'buscar', component: BuscarPdfComponent },
       { path: 'update', component: UpdateProfileComponent },
-      { path: 'profile', component: ProfileComponent },
+      { path: 'profile', component: ProfileComponent }
+    ]
+  }, {
+    path: 'suscriptor',
+    component: WindowComponent,
+    canActivate: [ GeneralGuard ],
+    canActivateChild: [ TypeGuard ],
+    children: [
+      { path: 'suscripciones', component: RevistasViewComponent }, // modificar
+      { path: 'revista/:id', component: RevistaFormComponent } // modificar
+    ]
+  }, {
+    path: 'editor',
+    component: WindowComponent,
+    canActivate: [ GeneralGuard ],
+    canActivateChild: [ TypeGuard ],
+    children: [
       { path: 'revistas', component: RevistasViewComponent },
       { path: 'publicar', component: RevistaFormComponent }
     ]

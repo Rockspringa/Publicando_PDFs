@@ -49,7 +49,9 @@ public class RevistaGetter extends AccesorTools {
             suscripciones.add(Revista.createRevista(id, editor, fechaPublicacion, nombre, categoria));
         }
 
-        return GSON.toJson(suscripciones);
+        Conexion.closeSession();
+
+        return GSON_FOR_DATE.toJson(suscripciones);
     }
 
     public static String getRevistaFromSuscripcion(String json) throws InvalidInputType, SQLException {
@@ -77,9 +79,13 @@ public class RevistaGetter extends AccesorTools {
             boolean meGustasActivos = res.getBoolean(8);
             boolean suscripcionesActivas = res.getBoolean(9);
 
+            Conexion.closeSession();
+
             return GSON.toJson(Revista.createRevista(id, editor, fechaPublicacion, nombre, categoria, descripcion,
                     comentariosActivos, meGustasActivos, suscripcionesActivas));
         }
+
+        Conexion.closeSession();
 
         return null;
     }

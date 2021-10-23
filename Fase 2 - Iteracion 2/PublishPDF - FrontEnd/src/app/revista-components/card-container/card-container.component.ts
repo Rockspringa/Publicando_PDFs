@@ -13,12 +13,6 @@ export class CardContainerComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.revistas = [
-      { id: 1, fecha: new Date(2021, 10, 9), editor: 'Chafa', nombre: 'Avon', categoria: 'ventas' },
-      { id: 1, fecha: new Date(2021, 10, 9), editor: 'Chafa', nombre: 'Avon', categoria: 'ventas' },
-      { id: 1, fecha: new Date(2021, 10, 9), editor: 'Chafa', nombre: 'Avon', categoria: 'ventas' },
-      { id: 1, fecha: new Date(2021, 10, 9), editor: 'Chafa', nombre: 'Avon', categoria: 'ventas' }
-    ]
   }
 
 }

@@ -4,5 +4,6 @@
     padding: 3em auto;
     margin: auto;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    gap: 2em;
+    grid-template-columns: repeat(3, 1fr);
 }

@@ -46,9 +46,10 @@ public class Revista {
         int numValido = (InputValidator.isUnsignedInt(id)) ? 1 : 0;
         numValido += (InputValidator.isValidText(editor)) ? 1 : 0;
         numValido += (InputValidator.isValidText(nombre)) ? 1 : 0;
+        numValido += (InputValidator.isValidText(categoria)) ? 1 : 0;
         numValido += (InputValidator.isValidText(descripcion)) ? 1 : 0;
 
-        if (numValido == 4)
+        if (numValido == 5)
             return new Revista(id, editor, fechaPublicacion, nombre, categoria, descripcion, comentariosActivos,
                     meGustasActivos, suscripcionesActivas);
         else
@@ -61,6 +62,7 @@ public class Revista {
         int numValido = (InputValidator.isUnsignedInt(id)) ? 1 : 0;
         numValido += (InputValidator.isValidText(editor)) ? 1 : 0;
         numValido += (InputValidator.isValidText(nombre)) ? 1 : 0;
+        numValido += (InputValidator.isValidText(categoria)) ? 1 : 0;
 
         if (numValido == 4)
             return new Revista(id, editor, fechaPublicacion, nombre, categoria);
@@ -75,9 +77,10 @@ public class Revista {
         int numValido = (InputValidator.isUnsignedInt(id)) ? 1 : 0;
         numValido += (InputValidator.isValidText(editor)) ? 1 : 0;
         numValido += (InputValidator.isValidText(nombre)) ? 1 : 0;
+        numValido += (InputValidator.isValidText(categoria)) ? 1 : 0;
         numValido += (InputValidator.isValidText(descripcion)) ? 1 : 0;
 
-        if (numValido == 4)
+        if (numValido == 5)
             return new Revista(id, editor, fechaPublicacion.toLocalDate(), nombre, categoria, descripcion,
                     comentariosActivos, meGustasActivos, suscripcionesActivas);
         else
@@ -90,6 +93,7 @@ public class Revista {
         int numValido = (InputValidator.isUnsignedInt(id)) ? 1 : 0;
         numValido += (InputValidator.isValidText(editor)) ? 1 : 0;
         numValido += (InputValidator.isValidText(nombre)) ? 1 : 0;
+        numValido += (InputValidator.isValidText(categoria)) ? 1 : 0;
 
         if (numValido == 4)
             return new Revista(id, editor, fechaPublicacion.toLocalDate(), nombre, categoria);

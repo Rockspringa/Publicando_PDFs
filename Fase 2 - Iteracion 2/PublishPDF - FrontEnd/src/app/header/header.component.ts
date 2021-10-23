@@ -8,7 +8,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  link: string = 'home';
+  link: string = '/user/home';
   @Input('header-options') headOpts!: ClickleableOption[];
   @Input('profile-options') profOpts!: ClickleableOption[];
 
