@@ -2,3 +2,4 @@
 <div class="body">
     <router-outlet></router-outlet>
 </div>
+<app-anuncio *ngIf="isSuscriptor()" [tags]="getTags()"></app-anuncio>

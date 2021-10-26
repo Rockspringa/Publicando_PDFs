@@ -1,0 +1,8 @@
+.fixed-bottom {
+    display: flex;
+    flex-direction: column;
+}
+
+.img-cont, .video-cont {
+    height: 75%;
+}

@@ -1,0 +1,59 @@
+<div class="container">
+    <div class="form-group">
+        <h1 class="title text-primary">Crear un anuncio</h1>
+    </div>
+    <form (ngSubmit)="subirAnuncio()" [formGroup]="formAnuncio">
+
+        <!-- Nombre de usuario del admin -->
+        <div class="form-group invisible">
+            <input id="admin" class="form-control" type="text" [value]="user.username" formControlName="administrador"
+                required>
+        </div>
+
+        <!-- Input del costo por dia -->
+        <div class="form-group">
+            <label for="costoDia" class="text-info req">Costo por Dia:</label>
+            <input id="costoDia" [ngClass]="inputs(this.formAnuncio.controls.costoDia)" type="text"
+                formControlName="costoDia" required>
+        </div>
+
+        <!-- Input de texto -->
+        <div class="form-group">
+            <label for="texto" class="text-info req">Texto que Mostrara:</label>
+            <textarea formControlName="texto" [ngClass]="inputs(this.formAnuncio.controls.texto)" id="texto" rows="3"
+                maxlength="150"></textarea>
+        </div>
+
+        <!-- Input de tipo -->
+        <div class="form-group">
+            <label class="text-info req">Tipo de anuncio</label>
+            <select>
+                <option disabled selected>Seleccione un tipo de anuncio:</option>
+                <option *ngFor="let opt of types | keyvalue" [value]="opt.value">{{ opt.key |
+                    titlecase }}</option>
+            </select>
+        </div>
+
+        <!-- Input de imagen
+        <div class="form-group">
+            <label for="fecha" class="text-info req">Fecha de publicacion</label>
+            <input id="fecha" [ngClass]="inputs(this.formAnuncio.controls.fechaPublicacion)" type="date"
+                formControlName="fechaPublicacion">
+        </div>
+        -->
+
+        <!-- Input de video -->
+        <div *ngIf="tipo == types.VIDEO" class="form-group">
+            <label for="video" class="text-info req">Link al video:</label>
+            <input id="video" [ngClass]="inputs(this.formAnuncio.controls.video)" type="text"
+                formControlName="video">
+        </div>
+
+        <!-- Boton de submit -->
+        <div class="center">
+            <button [ngClass]="button(formAnuncio)" [disabled]="formAnuncio.invalid" type="submit">Publicar
+                Anuncio</button>
+        </div>
+
+    </form>
+</div>

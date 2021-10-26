@@ -1,0 +1,7 @@
+<footer class="fixed-bottom">
+    <img *ngIf="anuncios[index].imagen" [src]="anuncios[index].imagen" alt="a" class="img-cont bg-primary">
+    <iframe *ngIf="anuncios[index].video" class="video-cont bg-primary" [src]="getVideoSource()" width="560" height="315"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        frameborder="0" allowfullscreen></iframe>
+    <div class="text-cont bg-primary text-white">{{ anuncios[index].texto }}</div>
+</footer>

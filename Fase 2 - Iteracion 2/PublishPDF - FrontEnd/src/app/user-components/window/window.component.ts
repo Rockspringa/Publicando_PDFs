@@ -23,4 +23,14 @@ export class WindowComponent implements OnInit {
 
   }
 
+  isSuscriptor(): boolean {
+    return this.user instanceof Suscriptor;
+  }
+
+  getTags(): string[] {
+    if (this.user instanceof Suscriptor)
+      return this.user.tags;
+    return [];
+  }
+
 }

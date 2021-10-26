@@ -24,6 +24,8 @@ import { RevistaComponent } from './revista-components/revista/revista.component
 import { ComentariosComponent } from './revista-components/comentarios/comentarios.component';
 import { SuscripcionComponent } from './revista-components/suscripcion/suscripcion.component';
 import { EtiquetasSelectComponent } from './user-components/etiquetas-select/etiquetas-select.component';
+import { AnuncioComponent } from './anuncios-components/anuncio/anuncio.component';
+import { AnuncioFormComponent } from './anuncios-components/anuncio-form/anuncio-form.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +47,9 @@ import { EtiquetasSelectComponent } from './user-components/etiquetas-select/eti
     RevistaComponent,
     ComentariosComponent,
     SuscripcionComponent,
-    EtiquetasSelectComponent
+    EtiquetasSelectComponent,
+    AnuncioComponent,
+    AnuncioFormComponent
   ],
   imports: [
     BrowserModule,
