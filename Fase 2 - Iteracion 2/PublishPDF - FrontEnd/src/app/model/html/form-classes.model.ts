@@ -4,6 +4,12 @@ export enum InputClasses {
     DEFAULT = 'form-control'
 }
 
+export enum RadioClasses {
+    ERROR = 'form-check-label text-danger',
+    VALID = 'form-check-label text-success',
+    DEFAULT = 'form-check-label'
+}
+
 export enum ButtonClasses {
     ERROR = 'btn btn-danger text-white',
     VALID = 'btn btn-primary',

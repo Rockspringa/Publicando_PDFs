@@ -1,4 +1,4 @@
-import { Revista } from './../../model/revista.model';
+import { Revista } from '../../model/revista/revista.model';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Editor } from 'src/app/model/users/editor.model';

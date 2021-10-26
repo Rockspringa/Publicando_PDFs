@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { Usuario } from './../../model/usuario.model';
 import { UsuarioService } from './../../services/users/usuario.service';
 import { VariablesService } from 'src/app/services/global/variables.service';
@@ -19,7 +20,7 @@ export class UpdateProfileComponent implements OnInit {
   file!: File;
   formUpdate!: FormGroup;
   user!: Suscriptor | Editor | Administrador;
-  foto!: string | ArrayBuffer;
+  foto: string | ArrayBuffer = "";
 
   inputs!: Function;
   button!: Function;
@@ -28,8 +29,9 @@ export class UpdateProfileComponent implements OnInit {
         private usuarioService: UsuarioService, private router: Router) { }
 
   ngOnInit(): void {
-    this.user = this.functions.getUserLogged();
-    this.foto = Usuario.url_foto + this.user.username;
+    this.user = this.functions.user;
+    if (this.user.foto)
+      this.foto = Usuario.url_foto + this.user.username;
     this.inputs = this.functions.getInputClasses;
     this.button = this.functions.getButtonClasses;
 
@@ -54,8 +56,9 @@ export class UpdateProfileComponent implements OnInit {
 
       this.usuarioService.updatePhoto(imgData, this.user).subscribe(
         (data: void) => {
+          this.user.foto = this.user.foto;
         }, (error: HttpErrorResponse) => {
-          alert(`No se pudo actualizar la imagen.\nError ${error.status}: ${error.statusText}`);
+          alert(`No se pudo actualizar la imagen.\nError ${error.status}: ${error.message}`);
           console.log(error);
         }
       )
@@ -89,12 +92,11 @@ export class UpdateProfileComponent implements OnInit {
         this.user.gustos = this.formUpdate.controls['gustos'].value;
         this.user.hobbies = this.formUpdate.controls['hobbies'].value;
 
-        this.functions.setGlobalUser(JSON.parse(JSON.stringify(this.user)));
+        this.functions.setGlobalUser(this.user);
 
         this.uploadPhoto();
-        this.router.navigate([ '/user/profile' ]);
       }, (error: HttpErrorResponse) => {
-        alert(`No se pudo actualizar la informacion.\nError ${error.status}: ${error.statusText}`);
+        alert(`No se pudo actualizar la informacion.\nError ${error.status}: ${error.message}`);
         console.log(error);
 
         this.router.navigateByUrl('/user/profile', { skipLocationChange: true }).then(() => {
@@ -102,6 +104,15 @@ export class UpdateProfileComponent implements OnInit {
         }); 
       }
     )
+  }
+
+  isInstance(user: Suscriptor | Editor | Administrador) {
+    return user instanceof Suscriptor;
+  }
+
+  setTags(data: string[]): void {
+    if (this.user instanceof Suscriptor)
+      this.user.tags = data;
   }
 
 }

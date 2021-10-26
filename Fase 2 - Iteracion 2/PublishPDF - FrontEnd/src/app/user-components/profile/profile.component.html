@@ -1,6 +1,9 @@
 <div class="container">
     <div class="form-group">
-        <label><h1 class="title text-primary">Mi perfil</h1></label>
+        <label>
+            <h1 *ngIf="vista" class="title text-primary">Editor</h1>
+            <h1 *ngIf="!vista" class="title text-primary">Mi perfil</h1>
+        </label>
         <img appUserPhoto class="form-control foto" [src]="foto" alt="Foto">
     </div>
     <div class="content text-info">
@@ -8,22 +11,32 @@
             <label>Nombre de usuario:</label>
             <input class="form-control" type="text" [value]="user.username" disabled>
         </div>
+
         <div class="form-group">
             <label>Nombre Completo:</label>
             <input class="form-control" type="text" [value]="user.nombre" disabled>
         </div>
+
         <div class="form-group">
             <label>Descripcion:</label>
             <textarea class="form-control" rows="3" disabled>{{ user.descripcion }}</textarea>
         </div>
+
         <div class="form-group">
             <label>Gustos:</label>
             <textarea class="form-control" rows="3" disabled>{{ user.gustos }}</textarea>
         </div>
+
         <div class="form-group">
             <label>Hobbies:</label>
             <textarea class="form-control" rows="3" disabled>{{ user.hobbies }}</textarea>
         </div>
-        <button [routerLink]="link" class="btn btn-info right" type="button">Modificar Perfil</button>
+        
+        <div class="form-group" *ngIf="isInstance(user)">
+            <label>Etiquetas:</label>
+            <app-etiquetas-select></app-etiquetas-select>
+        </div>
+        
+        <button *ngIf="vista" [routerLink]="link" class="btn btn-info right" type="button">Modificar Perfil</button>
     </div>
 </div>

@@ -1,25 +1,53 @@
 <div class="cont">
     <h1 class="title bg-primary text-white">{{ revista.nombre }}</h1>
-    <div class="wrapper" *ngIf="revista.descripcion != undefined">
+
+    <!-- Zona de visualizacion de numeros -->
+    <div class="wrapper" *ngIf="revista.numeros != 0">
         <iframe src="" frameborder="1"></iframe>
         <div class="numbers">
             <a href="#" class="number" *ngFor="let i of indexes">i</a>
         </div>
     </div>
 
+    <!-- Zona de Datos Principales -->
     <div class="wrapper">
         <div class="mini-data">
-            <p class="izq"><b>Editor:</b> {{ revista.editor }}</p>
-            <button *ngIf="revista.descripcion != undefined" class="der btn btn-secondary">A {{ revista.meGustas }}
+            <a [routerLink]="[ linkProfile, revista.editor ]" class="izq"><b>Editor:</b> {{ revista.editor }}</a>
+            <button (click)="darLike()" *ngIf="revista.meGustasActivos" [ngClass]="like">A {{ revista.meGustas }}
                 personas les gusta.</button>
-            <p *ngIf="revista.descripcion == undefined" class="der">A {{ revista.meGustas }} personas les gusta.</p>
+            <p *ngIf="!(revista.meGustasActivos)" class="der">A {{ revista.meGustas }} personas les gusta.</p>
             <p class="izq"><b>Categoria:</b> {{ revista.categoria }}</p>
         </div>
-        <b>Descripcion</b>
+        <b>Descripcion:</b>
         <div class="text bg-white">{{ revista.descripcion }}</div>
         <div class="tags">
             <b>Etiquetas: </b><br>
             <span *ngFor="let tag of revista.etiquetas" class="badge badge-pill badge-dark">{{ tag }}</span>
         </div>
+        <button *ngIf="(revista.suscripcionesActivas ?? true) && (revista.meGustasActivos === undefined)"
+            [routerLink]="[ link, revista.id ]" class="center btn btn-info">Suscribirse</button>
+        <hr class="border border-info" *ngIf="revista.meGustasActivos !== undefined">
+    </div>
+
+    <!-- Zona de Comentarios -->
+    <app-comentarios [cambio]="cambio" [revista]="revista.id" *ngIf="revista.meGustasActivos !== undefined">
+    </app-comentarios>
+
+    <!-- Zona de comentar la revista -->
+    <div class="wrapper" *ngIf="revista.comentariosActivos">
+        <hr class="border border-info">
+        <form (ngSubmit)="comentar()" [formGroup]="formComentar">
+
+            <!-- Input de comentario -->
+            <div class="form-group">
+                <label for="comentario"><b>Comentar:</b></label>
+                <textarea id="comentario" [ngClass]="inputs(this.formComentar.controls.comentario)" type="text"
+                    class="text" formControlName="comentario" cols="3" maxlength="150" required></textarea>
+            </div>
+
+            <!-- Boton de submit -->
+            <button [ngClass]="'center ' + button(formComentar)" [disabled]="formComentar.invalid"
+                type="submit">Comentar</button>
+        </form>
     </div>
 </div>

@@ -27,7 +27,7 @@
 .text {
     margin: 0.5em;
     padding: 1em;
-    border: 2px solid dodgerblue;
+    border: 1px solid dodgerblue;
     border-radius: 2px;
 }
 
@@ -41,9 +41,20 @@
     margin: auto 0 auto auto;
 }
 
+.center {
+    margin: 0 auto;
+    display: block;
+}
+
 iframe {
     width: 80%;
     height: 20em;
     margin: 1em auto;
     display: block;
+}
+
+.form-group {
+    vertical-align: middle;
+    display: flex;
+    flex-direction: row;
 }

@@ -27,36 +27,20 @@ export class UsuarioService {
     }
   }
 
-  findOne(data: Suscriptor | Editor | Administrador): Observable<{}> {
-    return this.http.get<{}>(`${this.serverUrl}/read`, this.doTwoParams(data));
+  findOne(data: Suscriptor | Editor | Administrador): Observable<Suscriptor | Editor | Administrador> {
+    return this.http.get<Suscriptor | Editor | Administrador>(`${this.serverUrl}/read`, this.doTwoParams(data));
   }
 
-  logIn(data: Usuario): Observable<{
-        username: string,
-        nombre: string,
-        type: string
-      }> {
-    return this.http.post<{
-        username: string,
-        nombre: string,
-        type: string
-      }>(`${this.serverUrl}/read`, null, this.doTwoParams(data));
+  logIn(data: Usuario): Observable<Suscriptor | Editor | Administrador> {
+    return this.http.post<Suscriptor | Editor | Administrador>(`${this.serverUrl}/read`, null, this.doTwoParams(data));
   }
 
   authenticate(): Observable<void> {
     return this.http.post<void>(`${this.serverUrl}/authenticate`, null, this.doTwoParams(null));
   }
 
-  create(data: Suscriptor | Editor | Administrador): Observable<{
-        username: string,
-        nombre: string,
-        type: string
-      }> {
-    return this.http.post<{
-        username: string,
-        nombre: string,
-        type: string
-      }>(this.serverUrl, data);
+  create(data: Suscriptor | Editor | Administrador): Observable<Suscriptor | Editor | Administrador> {
+    return this.http.post<Suscriptor | Editor | Administrador>(this.serverUrl, data);
   }
 
   patch(data: Suscriptor | Editor | Administrador): Observable<void> {
@@ -69,6 +53,11 @@ export class UsuarioService {
 
   getPhoto(user: Suscriptor | Editor | Administrador): Observable<any> {
     return this.http.get<any>(`${this.serverUrl}/photo/${user.username}`, this.doTwoParams(null));
+  }
+
+  getTags(user: Suscriptor): Observable<string[][]> {
+    return this.http.get<string[][]>(`${this.serverUrl}/tags`,
+        { params: new HttpParams().append('user', user.username) });
   }
 
 }

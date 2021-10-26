@@ -1,5 +1,11 @@
-<div class="form-group">
-    <input id="buscar" class="form-control" type="text" name="buscar">
-    <label for="buscar">Buscar</label>
+<div class="cont">
+    <form (ngSubmit)="buscarRevista()" [formGroup]="formBuscar" class="form-group">
+
+        <!-- Input de busqueda -->
+        <input [ngClass]="inputs(this.formBuscar.controls.criterio)" type="text" formControlName="criterio" required>
+
+        <!-- Boton de submit -->
+        <button [ngClass]="button(formBuscar)" [disabled]="formBuscar.invalid" type="submit">Buscar</button>
+    </form>
 </div>
-<app-card-container></app-card-container>
+<app-card-container [revistas]="revistas"></app-card-container>

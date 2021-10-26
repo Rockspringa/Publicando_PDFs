@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Revista } from 'src/app/model/revista.model';
+import { Revista } from 'src/app/model/revista/revista.model';
 
 @Component({
   selector: 'app-card-container',

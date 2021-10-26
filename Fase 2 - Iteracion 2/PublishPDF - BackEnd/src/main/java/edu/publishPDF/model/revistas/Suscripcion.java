@@ -10,7 +10,7 @@ public class Suscripcion {
     private final int revista;
     private final String suscriptor;
     private LocalDate fechaSuscripcion;
-    private boolean mensual;
+    private boolean mensual = true;
 
     private Suscripcion(int revista, String suscriptor) {
         this.revista = revista;

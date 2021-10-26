@@ -1,0 +1,34 @@
+.cont {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.cont > * {
+    width: 100%;
+}
+
+.badge {
+    margin: auto 0.5em;
+    border: 1px solid black !important;
+}
+
+.black:hover {
+    margin: auto 0.5em;
+    background-color: white !important;
+    color: black !important;
+}
+
+.white:hover {
+    margin: auto 0.5em;
+    background-color: black !important;
+    color: white !important;
+}
+
+.click span {
+    cursor: pointer;
+}
+
+p {
+    margin: 0.5em auto;
+}

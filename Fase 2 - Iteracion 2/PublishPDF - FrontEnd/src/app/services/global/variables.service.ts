@@ -1,10 +1,10 @@
+import { RadioClasses, ButtonClasses, InputClasses } from './../../model/html/form-classes.model';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, Output, EventEmitter } from '@angular/core';
 import { Administrador } from 'src/app/model/users/admin.model';
 import { Editor } from 'src/app/model/users/editor.model';
 import { Suscriptor } from 'src/app/model/users/suscriptor.model';
-import { ButtonClasses, InputClasses } from 'src/app/model/html/form-classes.model';
 import { FormGroup } from '@angular/forms';
 
 @Injectable({
@@ -12,13 +12,12 @@ import { FormGroup } from '@angular/forms';
 })
 export class VariablesService {
 
+  user!: Suscriptor | Editor | Administrador;
+
   constructor(private router: Router) { }
 
-  setGlobalUser(data: {
-        username: string,
-        nombre: string,
-        type: string
-      }) {
+  setGlobalUser(data: Suscriptor | Editor | Administrador) {
+    this.user = data;
     localStorage.setItem('usuario', JSON.stringify(data));
     this.router.navigate(['/user/home']);
   }
@@ -43,7 +42,7 @@ export class VariablesService {
   }
 
   logoutUser() {
-    if (localStorage.getItem('usuario')) {
+    if (localStorage.getItem('usuario') && this.user) {
       localStorage.removeItem('usuario');
     }
   }
@@ -55,13 +54,22 @@ export class VariablesService {
     } else {
       text = "Ocurrio un error al leer los datos, vuelva a intentarlo. ";
     }
-    alert(text + `Error ${error.status}: ${error.statusText}`);
+    alert(text + `Error ${error.status}: ${error.message}`);
     console.log(error);
   }
 
   getUserLogged(): Suscriptor | Editor | Administrador {
     let userJson: string = localStorage.getItem('usuario') || "{}";
     return this.getUserFromJson(JSON.parse(userJson));
+  }
+
+  getRadioClasses(input: any): string {
+    if (input.pristine)
+      return RadioClasses.DEFAULT;
+    else if (input.invalid)
+      return RadioClasses.ERROR;
+    else
+      return RadioClasses.VALID;
   }
 
   getInputClasses(input: any): string {

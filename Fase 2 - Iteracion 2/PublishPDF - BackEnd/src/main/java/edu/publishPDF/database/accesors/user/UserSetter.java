@@ -8,7 +8,9 @@ import edu.publishPDF.database.Conexion;
 import edu.publishPDF.database.accesors.AccesorTools;
 import edu.publishPDF.model.errores.InvalidInputType;
 import edu.publishPDF.model.errores.TooManyArgumentsException;
+import edu.publishPDF.model.users.User;
 import edu.publishPDF.model.users.UserType;
+import edu.publishPDF.model.users.types.Suscriptor;
 import edu.publishPDF.model.users.types.UserFactory;
 
 public class UserSetter extends AccesorTools {
@@ -29,7 +31,8 @@ public class UserSetter extends AccesorTools {
      * @throws SQLException
      */
     public static boolean updateUser(String json) throws InvalidInputType, SQLException {
-        Map<String, String> args = UserFactory.getStringAttributes(UserFactory.createUserFromJson(json));
+        User user = UserFactory.createUserFromJson(json);
+        Map<String, String> args = UserFactory.getStringAttributes(user);
         Conexion.createSession();
 
         StringBuilder sb = new StringBuilder();
@@ -53,6 +56,11 @@ public class UserSetter extends AccesorTools {
 
         int res = stmt.executeUpdate();
 
+        stmt.close();
+
+        if (user instanceof Suscriptor)
+            ExtrasSetter.updateUserTags(user.getUsername(), ((Suscriptor) user).getTags());
+
         Conexion.closeSession();
 
         return res > 0;
@@ -70,6 +78,7 @@ public class UserSetter extends AccesorTools {
 
         int res = stmt.executeUpdate();
 
+        stmt.close();
         Conexion.closeSession();
 
         return res > 0;

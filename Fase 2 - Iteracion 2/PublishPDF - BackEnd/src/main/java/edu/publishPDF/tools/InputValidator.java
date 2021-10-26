@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 
 public class InputValidator {
 
-    private static Pattern textPattern = Pattern.compile("^[\\w \\n]*$");
+    private static Pattern textPattern = Pattern.compile("^[\\w \\n\\.\\,]*$");
     private static Pattern numPattern = Pattern.compile("^[\\d]+$");
     
     public static boolean isValidText(String s) {

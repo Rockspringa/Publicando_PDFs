@@ -4,6 +4,7 @@ export interface Revista {
     nombre: string;
     categoria: string;
     fechaPublicacion: Date;
+    costeMes?: number;
     descripcion?: string;
     numeros?: number;
     etiquetas?: [];

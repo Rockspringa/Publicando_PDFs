@@ -1,4 +1,4 @@
-import { Revista } from './../../model/revista.model';
+import { Revista } from '../../model/revista/revista.model';
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
@@ -9,10 +9,12 @@ import { Component, Input, OnInit } from '@angular/core';
 export class PdfCardComponent implements OnInit {
 
   @Input() revista!: Revista;
+  revistaLink: string = "/suscriptor/revista/";
 
   constructor() { }
 
   ngOnInit(): void {
+    this.revistaLink += this.revista.id;
   }
 
 }

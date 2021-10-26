@@ -1,3 +1,4 @@
+import { VariablesService } from 'src/app/services/global/variables.service';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -20,6 +21,9 @@ import { RevistaFormComponent } from './revista-components/revista-form/revista-
 import { RevistasViewComponent } from './revista-components/revistas-view/revistas-view.component';
 import { NumeroFormComponent } from './revista-components/numero-form/numero-form.component';
 import { RevistaComponent } from './revista-components/revista/revista.component';
+import { ComentariosComponent } from './revista-components/comentarios/comentarios.component';
+import { SuscripcionComponent } from './revista-components/suscripcion/suscripcion.component';
+import { EtiquetasSelectComponent } from './user-components/etiquetas-select/etiquetas-select.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +42,10 @@ import { RevistaComponent } from './revista-components/revista/revista.component
     RevistaFormComponent,
     RevistasViewComponent,
     NumeroFormComponent,
-    RevistaComponent
+    RevistaComponent,
+    ComentariosComponent,
+    SuscripcionComponent,
+    EtiquetasSelectComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +53,7 @@ import { RevistaComponent } from './revista-components/revista/revista.component
     AppRoutingModule,
     ReactiveFormsModule
   ],
-  providers: [ ],
+  providers: [ VariablesService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

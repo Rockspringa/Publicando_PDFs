@@ -23,7 +23,7 @@ export class GeneralGuard implements CanActivate {
       ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     let autorizado: boolean = false;
 
-    if (localStorage.getItem('usuario')) {
+    if (localStorage.getItem('usuario') && this.funciones.user) {
       autorizado = true;/*
       this.usuarioService.authenticate().subscribe(
         (value: void) => {

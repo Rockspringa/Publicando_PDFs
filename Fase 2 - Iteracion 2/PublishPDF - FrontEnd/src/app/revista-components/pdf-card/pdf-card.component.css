@@ -4,12 +4,14 @@ img {
 }
 
 .card {
+    display: block;
     width: 100%;
     min-width: 14em;
     height: fit-content;
     text-align: center;
     cursor: pointer;
     margin: auto;
+    text-decoration: none;
 }
 
 .card-body {

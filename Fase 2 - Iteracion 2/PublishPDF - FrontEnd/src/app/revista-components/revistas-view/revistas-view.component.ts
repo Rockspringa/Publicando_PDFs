@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Revista } from 'src/app/model/revista.model';
+import { Revista } from 'src/app/model/revista/revista.model';
 import { SuscripcionService } from './../../services/suscripciones/suscripcion.service';
 import { VariablesService } from 'src/app/services/global/variables.service';
 import { Component, OnInit } from '@angular/core';
@@ -22,7 +22,7 @@ export class RevistasViewComponent implements OnInit {
   constructor(private functions: VariablesService, private suscripcionesService: SuscripcionService) { }
 
   ngOnInit(): void {
-    this.user = this.functions.getUserLogged();
+    this.user = this.functions.user;
     this.getRevistas();
   }
 
@@ -43,7 +43,7 @@ export class RevistasViewComponent implements OnInit {
         this.revistas = revistas;
       }, (error: HttpErrorResponse) => {
         this.revistas = [];
-        alert(`No se pudieron recuperar sus sucripciones.\nError ${error.status}: ${error.statusText}`);
+        alert(`No se pudieron recuperar sus sucripciones.\nError ${error.status}: ${error.message}`);
         console.log(error);
       }
     )

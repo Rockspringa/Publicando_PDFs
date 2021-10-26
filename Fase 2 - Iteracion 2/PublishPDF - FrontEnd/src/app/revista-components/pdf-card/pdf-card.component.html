@@ -1,5 +1,5 @@
-<div class="card">
-    <div class="card-body">
+<a [routerLink]="revistaLink" class="card">
+    <div class="card-body text-primary">
         <h4 class="card-title title">{{ revista.nombre }}</h4>
         <h6 class="card-text">de: {{ revista.editor }}</h6>
     </div>
@@ -7,4 +7,4 @@
         <p>Categoria: '{{ revista.categoria }}'</p>
         <h6>{{ revista.fechaPublicacion | date : 'dd/MM/yyyy' }}</h6>
     </div>
-</div>
+</a>

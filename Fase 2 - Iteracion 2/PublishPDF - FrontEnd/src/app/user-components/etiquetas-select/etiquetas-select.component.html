@@ -1,0 +1,18 @@
+<div class="selected" *ngIf="!seleccionar">
+    <span *ngFor="let tag of tagsEscogidas" class="black badge badge-pill badge-light">
+        {{ tag }}</span>
+</div>
+<div class="selected click cont" *ngIf="seleccionar">
+    <p>Etiquetas seleccionadas:</p>
+    <div>
+        <span (click)="eliminarTag(tag)" *ngFor="let tag of tagsEscogidas"
+            class="black badge badge-pill badge-dark">{{ tag }}</span>
+    </div>
+</div>
+<div class="no-selected click cont" *ngIf="seleccionar">
+    <p>Etiquetas no seleccionadas:</p>
+    <div>
+        <span (click)="agregarTag(tag)" *ngFor="let tag of noEscogidas"
+            class="white badge badge-pill badge-light">{{ tag }}</span>
+    </div>
+</div>

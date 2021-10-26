@@ -1,0 +1,36 @@
+.container {
+    padding: 0;
+}
+
+h1 {
+    margin: 0;
+    padding: 0.5em 1.5em;
+}
+
+.wrap {
+    margin: 2em;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: row;
+}
+
+.form-group > input {
+    width: 65%;
+    background-color: white !important;
+}
+
+.form-group > label {
+    width: 35%;
+}
+
+.form-group > .form-check {
+    width: 50%;
+}
+
+.center {
+    text-align: center;
+    margin: auto;
+    display: block;
+}

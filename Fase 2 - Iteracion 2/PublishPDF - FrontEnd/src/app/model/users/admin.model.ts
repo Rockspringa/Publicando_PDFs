@@ -12,7 +12,7 @@ export class Administrador extends Usuario {
     ];
 
     private readonly menu = [
-        new ClickleableOption('Mi perfil', 'profile'),
+        new ClickleableOption('Mi perfil', '/user/profile'),
         new ClickleableOption('Cerrar sesion', '/login')
     ];
 

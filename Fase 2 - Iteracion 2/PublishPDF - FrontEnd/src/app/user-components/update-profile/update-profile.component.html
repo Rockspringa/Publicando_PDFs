@@ -52,6 +52,14 @@
                 formControlName="hobbies"></textarea>
         </div>
 
+        <!-- Seleccion de etiquetas -->
+        <div class="form-group tags" *ngIf="isInstance(user)">
+            <label class="text-info">Etiquetas</label>
+            <div>
+                <app-etiquetas-select (tagsChanges)="setTags($event)" [seleccionar]="true"></app-etiquetas-select>
+            </div>
+        </div>
+
         <!-- Boton de submit -->
         <div class="center">
             <button [ngClass]="button(formUpdate)" [disabled]="formUpdate.invalid" type="submit">Actualizar

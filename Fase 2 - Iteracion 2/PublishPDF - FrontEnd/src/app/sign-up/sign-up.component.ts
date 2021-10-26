@@ -15,7 +15,7 @@ import { VariablesService } from '../services/global/variables.service';
   styleUrls: ['./sign-up.component.css']
 })
 export class SignUpComponent implements OnInit {
-  
+
   readonly options = UserType;
   formSignUp!: FormGroup;
   file!: File;
@@ -39,7 +39,7 @@ export class SignUpComponent implements OnInit {
       descripcion: ['', [Validators.pattern("^[\\w ]{1,150}$")]],
       gustos: ['', [Validators.pattern("^[\\w ]{1,150}$")]],
       hobbies: ['', [Validators.pattern("^[\\w ]{1,150}$")]],
-      tipo: [null]
+      tipo: [null, [Validators.required]]
     });
   }
 
@@ -54,31 +54,40 @@ export class SignUpComponent implements OnInit {
       case UserType.EDITOR:
         user = new Editor('', '');
         break;
-        
+
       case UserType.ADMINISTRADOR:
         user = new Administrador('', '');
         break;
-      
+
       default:
         alert('Los valores aceptados fueron corrompidos.');
         return;
     }
-    
+
     user = Object.assign(user, this.formSignUp.value);
     this.usuarioService.create(user).subscribe(
-      (data: {
-          username: string,
-          nombre: string,
-          type: string
-        }) => {
-          this.functions.setGlobalUser(data);
-          this.uploadPhoto(user);
-        },
+      (data: Suscriptor | Editor | Administrador) => {
+        let user: Suscriptor | Editor | Administrador;
+        const json = JSON.stringify(data);
+
+        if (json.includes("_tags"))
+          user = new Suscriptor('', '');
+
+        else if (json.includes("_revistas"))
+          user = new Editor('', '');
+
+        else
+          user = new Administrador('', '');
+
+        user = Object.assign(user, data);
+        this.functions.setGlobalUser(user);
+        this.uploadPhoto(user);
+      },
       (error: HttpErrorResponse) => {
         this.functions.errorInLogin(error);
         this.router.navigateByUrl('/login', { skipLocationChange: true }).then(() => {
-          this.router.navigate([ '/sign-up' ]);
-        }); 
+          this.router.navigate(['/sign-up']);
+        });
       }
     );
   }
@@ -94,6 +103,7 @@ export class SignUpComponent implements OnInit {
 
       this.usuarioService.updatePhoto(imgData, user).subscribe(
         (data: void) => {
+          this.functions.setGlobalUser(user);
         }, (error: HttpErrorResponse) => {
           alert(`No se pudo subir la imagen.\nError ${error.status}: ${error.statusText}`);
           console.log(error);

@@ -9,8 +9,8 @@ import java.sql.PreparedStatement;
 
 public class Conexion extends HttpServlet {
 
+    private static int stmts = 0;
     private static Connection conn = null;
-    private static PreparedStatement stmt = null;
     private static final String URL = "jdbc:mysql://localhost:3306/PUBLISH_PDF";
     private static final String USER = "admin_publish-pdf";
     private static final String PASS = "nimda";
@@ -18,16 +18,12 @@ public class Conexion extends HttpServlet {
     public static boolean closeSession() throws SQLException {
         boolean success = false;
 
-        if (stmt != null) {
-            stmt.close();
-            stmt = null;
-            success = true;
-        }
-        if (conn != null) {
+        if (conn != null && stmts == 0) {
             conn.close();
-            conn = null;
             success = true;
-        }
+        } else
+            stmts--;
+
         return success;
     }
 
@@ -67,7 +63,8 @@ public class Conexion extends HttpServlet {
     }
 
     public static PreparedStatement getPrepareStatement(String query) throws SQLException {
-        Conexion.stmt = Conexion.conn.prepareStatement(query);
-        return Conexion.stmt;
+        stmts++;
+        return Conexion.conn.prepareStatement(query);
+
     }
 }

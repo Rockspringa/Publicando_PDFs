@@ -1,0 +1,11 @@
+<div class="cont">
+    <p><b>Comentarios: </b></p>
+    <p *ngIf="comentarios.length === 0">No hay ningun comentario</p>
+    <div class="conjunto">
+        <div class="comentario" *ngFor="let comentario of comentarios">
+            <p class="sus">De: {{ comentario.suscriptor }}</p>
+            <p class="fecha">{{ comentario.fecha }}</p>
+            <div class="contenido">{{ comentario.comentario }}</div>
+        </div>
+    </div>
+</div>

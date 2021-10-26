@@ -1,0 +1,35 @@
+.cont {
+    margin: 2em;
+    font-size: medium;
+}
+
+.comentario {
+    padding: 1em;
+    border: 1px solid dodgerblue;
+    background-color: white;
+    border-radius: 5px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.conjunto {
+    max-height: 8em;
+    padding: 0;
+    margin: 0;
+    overflow-y: auto;
+}
+
+.contenido {
+    grid-column: span 2;
+    overflow-wrap: break-word;
+}
+
+.sus {
+    font-size: medium;
+    font-weight: bold;
+}
+
+.fecha {
+    font-size: small;
+    text-align: right;
+}

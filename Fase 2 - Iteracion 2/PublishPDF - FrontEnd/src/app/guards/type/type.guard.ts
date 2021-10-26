@@ -27,8 +27,7 @@ export class TypeGuard implements CanActivateChild {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     
       try {
-        const user: Suscriptor | Editor | Administrador = this.funciones.getUserLogged();
-        let clase: any;
+        const user: Suscriptor | Editor | Administrador = this.funciones.user;
 
         let autorizado: boolean = false;
         

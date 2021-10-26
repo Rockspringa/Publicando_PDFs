@@ -32,3 +32,11 @@ h1 {
 .center {
     text-align: center;
 }
+
+.tags > label {
+    width: 23%;
+}
+
+.tags > div {
+    width: 77%;
+}

@@ -7,13 +7,17 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-import edu.publishPDF.tools.gsonTools.DateAdapter;
+import edu.publishPDF.model.errores.InvalidInputType;
+import edu.publishPDF.model.revistas.Suscripcion;
+import edu.publishPDF.tools.gsonTools.DateAdapters;
 
 public class AccesorTools {
 
     protected static final Gson GSON = new Gson();
     protected static final Gson GSON_FOR_DATE = new GsonBuilder().setPrettyPrinting()
-            .registerTypeAdapter(LocalDate.class, new DateAdapter()).create();
+            .registerTypeAdapter(LocalDate.class, new DateAdapters.DateAdapter())
+            .registerTypeAdapter(LocalDate.class, new DateAdapters.DateReceivedAdapter())
+            .create();
 
     protected static String toCsv(boolean firstComma, String... args) {
         StringBuilder sb = new StringBuilder((firstComma) ? ", " : "");
@@ -39,6 +43,15 @@ public class AccesorTools {
         out[2] = jsonObj.get("type").getAsString();
 
         return out;
+    }
+
+    protected static Suscripcion toSuscripcionValidada(String json) throws InvalidInputType {
+        Suscripcion suscripcion = GSON_FOR_DATE.fromJson(json, Suscripcion.class);
+
+        suscripcion = Suscripcion.createSuscripcion(suscripcion.getRevista(), suscripcion.getSuscriptor(),
+                suscripcion.getFechaSuscripcion(), suscripcion.isMensual()); // validacion de campos
+
+        return suscripcion;
     }
 
 }

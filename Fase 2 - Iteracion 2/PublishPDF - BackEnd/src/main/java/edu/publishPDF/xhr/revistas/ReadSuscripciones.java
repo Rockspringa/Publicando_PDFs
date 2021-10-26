@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import edu.publishPDF.database.accesors.revistas.RevistaGetter;
+import edu.publishPDF.database.accesors.revistas.SuscritoGetter;
 import edu.publishPDF.model.errores.InvalidInputType;
 import edu.publishPDF.model.errores.TooManyArgumentsException;
 import edu.publishPDF.tools.InputReader;
@@ -24,7 +24,7 @@ public class ReadSuscripciones extends HttpServlet {
         String username = request.getParameter("user");
 
         try {
-            String suscripcionesJson = RevistaGetter.getRevistasSuscriptas(username);
+            String suscripcionesJson = SuscritoGetter.getRevistasSuscriptas(username);
             response.getWriter().print(suscripcionesJson);
         } catch (SQLException | TooManyArgumentsException e) {
             response.sendError(500, "No se pudo encontrar las suscripciones del usuario.");
@@ -44,7 +44,11 @@ public class ReadSuscripciones extends HttpServlet {
         try (InputReader reader = new InputReader(request.getReader())) {
             String suscripcionJson = reader.readInput();
 
-            String revistaJson = RevistaGetter.getRevistaFromSuscripcion(suscripcionJson);
+            String revistaJson = SuscritoGetter.getRevistaFromSuscripcion(suscripcionJson);
+
+            if (revistaJson == null)
+                revistaJson = SuscritoGetter.getRevistaFromSinSuscripcion(suscripcionJson);
+            
             response.getWriter().print(revistaJson);
         } catch (SQLException e) {
             response.sendError(500, "No se pudo encontrar las suscripciones del usuario.");

@@ -3,7 +3,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Editor } from 'src/app/model/users/editor.model';
 import { UsuarioService } from './../../services/users/usuario.service';
 import { Component, Input, OnInit } from '@angular/core';
-import { Revista } from 'src/app/model/revista.model';
+import { Revista } from 'src/app/model/revista/revista.model';
 
 @Component({
   selector: 'app-numero-form',

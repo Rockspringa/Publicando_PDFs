@@ -11,13 +11,16 @@ import { VariablesService } from 'src/app/services/global/variables.service';
 })
 export class WindowComponent implements OnInit {
 
+  ejecutar: boolean = false;
   user!: Suscriptor | Editor | Administrador;
 
   constructor(private variables: VariablesService) {
-    this.user = this.variables.getUserLogged();
   }
 
   ngOnInit(): void {
+    this.user = this.variables.user;
+    this.ejecutar = true;
+
   }
 
 }

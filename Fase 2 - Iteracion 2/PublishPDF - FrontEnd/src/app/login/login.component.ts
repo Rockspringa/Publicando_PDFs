@@ -1,3 +1,6 @@
+import { Suscriptor } from 'src/app/model/users/suscriptor.model';
+import { Editor } from 'src/app/model/users/editor.model';
+import { Administrador } from 'src/app/model/users/admin.model';
 import { HttpErrorResponse } from '@angular/common/http';
 import { VariablesService } from './../services/global/variables.service';
 import { Component, OnInit } from '@angular/core';
@@ -20,7 +23,7 @@ export class LoginComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder, private usuarioService: UsuarioService,
     private functions: VariablesService) {
-      this.functions.logoutUser();
+    this.functions.logoutUser();
   }
 
   ngOnInit(): void {
@@ -37,13 +40,22 @@ export class LoginComponent implements OnInit {
     this.cargando = "cargando";
     const user = Object.assign(new Usuario('', ''), this.formLogin.value);
     this.usuarioService.logIn(user).subscribe(
-      (data: {
-            username: string,
-            nombre: string,
-            type: string
-          }) => {
+      (data: Suscriptor | Editor | Administrador) => {
+        let user: Suscriptor | Editor | Administrador;
+        const json = JSON.stringify(data);
+
+        if (json.includes("_tags"))
+          user = new Suscriptor('', '');
+
+        else if (json.includes("_revistas"))
+          user = new Editor('', '');
+
+        else
+          user = new Administrador('', '');
+
+        user = Object.assign(user, data);
         this.cargando = "cargando invisible";
-        this.functions.setGlobalUser(data);
+        this.functions.setGlobalUser(user);
       },
       (error: HttpErrorResponse) => {
         this.functions.errorInLogin(error);

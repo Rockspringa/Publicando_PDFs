@@ -70,6 +70,8 @@ public class UserCreator extends AccesorTools {
         } else
             Conexion.finishTransaction(false);
 
+        stmt.close();
+        Conexion.closeSession();
         Conexion.closeSession();
 
         return out;

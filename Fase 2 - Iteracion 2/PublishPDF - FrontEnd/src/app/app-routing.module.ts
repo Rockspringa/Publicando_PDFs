@@ -1,3 +1,4 @@
+import { SuscripcionComponent } from './revista-components/suscripcion/suscripcion.component';
 import { RevistaComponent } from './revista-components/revista/revista.component';
 import { RevistasViewComponent } from './revista-components/revistas-view/revistas-view.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
@@ -31,7 +32,9 @@ const routes: Routes = [
     canActivateChild: [ TypeGuard ],
     children: [
       { path: 'suscripciones', component: RevistasViewComponent },
-      { path: 'revista/:id', component: RevistaComponent }
+      { path: 'revista/:id', component: RevistaComponent },
+      { path: 'profile/:username', component: ProfileComponent },
+      { path: 'suscribirse/:id', component: SuscripcionComponent }
     ]
   }, {
     path: 'editor',

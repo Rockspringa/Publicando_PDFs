@@ -13,21 +13,23 @@ public class Revista {
     private final LocalDate fechaPublicacion;
     private final String nombre;
     private final String categoria;
+    private Double costeMes;
     private int numeros;
     private int meGustas;
     private String descripcion;
     private String[] etiquetas;
-    private boolean comentariosActivos = true;
-    private boolean meGustasActivos = true;
-    private boolean suscripcionesActivas = true;
+    private Boolean comentariosActivos;
+    private Boolean meGustasActivos;
+    private Boolean suscripcionesActivas = true;
 
-    private Revista(int id, String editor, LocalDate fechaPublicacion, String nombre, String categoria,
-            String descripcion, boolean comentariosActivos, boolean meGustasActivos, boolean suscripcionesActivas) {
+    private Revista(int id, String editor, LocalDate fechaPublicacion, String nombre, String categoria, double costeMes,
+            String descripcion, Boolean comentariosActivos, Boolean meGustasActivos, boolean suscripcionesActivas) {
         this.id = id;
         this.editor = editor;
         this.fechaPublicacion = fechaPublicacion;
         this.nombre = nombre;
         this.categoria = categoria;
+        this.costeMes = costeMes;
         this.descripcion = descripcion;
         this.comentariosActivos = comentariosActivos;
         this.meGustasActivos = meGustasActivos;
@@ -43,7 +45,7 @@ public class Revista {
     }
 
     public static Revista createRevista(int id, String editor, LocalDate fechaPublicacion, String nombre,
-            String categoria, String descripcion, boolean comentariosActivos, boolean meGustasActivos,
+            double costeMes, String categoria, String descripcion, boolean comentariosActivos, boolean meGustasActivos,
             boolean suscripcionesActivas) throws InvalidInputType {
 
         int numValido = (InputValidator.isUnsignedInt(id)) ? 1 : 0;
@@ -53,8 +55,8 @@ public class Revista {
         numValido += (InputValidator.isValidText(descripcion)) ? 1 : 0;
 
         if (numValido == 5)
-            return new Revista(id, editor, fechaPublicacion, nombre, categoria, descripcion, comentariosActivos,
-                    meGustasActivos, suscripcionesActivas);
+            return new Revista(id, editor, fechaPublicacion, nombre, categoria, costeMes, descripcion,
+                    comentariosActivos, meGustasActivos, suscripcionesActivas);
         else
             throw new InvalidInputType();
     }
@@ -74,17 +76,17 @@ public class Revista {
     }
 
     public static Revista createRevista(int id, String editor, Date fechaPublicacion, String nombre, String categoria,
-            String descripcion, boolean comentariosActivos, boolean meGustasActivos, boolean suscripcionesActivas)
-            throws InvalidInputType {
+            double costeMes, String descripcion, Boolean comentariosActivos, Boolean meGustasActivos,
+            boolean suscripcionesActivas) throws InvalidInputType {
 
         int numValido = (InputValidator.isUnsignedInt(id)) ? 1 : 0;
         numValido += (InputValidator.isValidText(editor)) ? 1 : 0;
         numValido += (InputValidator.isValidText(nombre)) ? 1 : 0;
         numValido += (InputValidator.isValidText(categoria)) ? 1 : 0;
-        numValido += (InputValidator.isValidText(descripcion)) ? 1 : 0;
+        numValido += (InputValidator.isValidText((descripcion != null) ? descripcion : "")) ? 1 : 0;
 
         if (numValido == 5)
-            return new Revista(id, editor, fechaPublicacion.toLocalDate(), nombre, categoria, descripcion,
+            return new Revista(id, editor, fechaPublicacion.toLocalDate(), nombre, categoria, costeMes, descripcion,
                     comentariosActivos, meGustasActivos, suscripcionesActivas);
         else
             throw new InvalidInputType();
@@ -179,6 +181,13 @@ public class Revista {
     public void setEtiquetas(String[] etiquetas) {
         this.etiquetas = etiquetas;
     }
-    
+
+    public double getCosteMes() {
+        return costeMes;
+    }
+
+    public void setCosteMes(double costeMes) {
+        this.costeMes = costeMes;
+    }
 
 }

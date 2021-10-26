@@ -13,7 +13,7 @@ import edu.publishPDF.model.users.UserType;
 import edu.publishPDF.model.users.types.UserFactory;
 
 public class UserGetter extends AccesorTools {
-    
+
     private static final String GET_USER = "SELECT nombre FROM "
             + "USUARIO WHERE nombre_usuario = ? AND contraseña LIKE BINARY ?;";
 
@@ -47,14 +47,18 @@ public class UserGetter extends AccesorTools {
         ResultSet res = stmt.executeQuery();
 
         if (res.next()) {
+            stmt.close();
             for (UserType type : UserType.values()) {
                 String user = getUserData(username, type);
-                if (user != null)
+                if (user != null) {
+                    Conexion.closeSession();
                     return user;
+                }
             }
+            Conexion.closeSession();
             return null;
         } else {
-            Conexion.closeSession();
+            stmt.close();
             return null;
         }
     }
@@ -92,13 +96,13 @@ public class UserGetter extends AccesorTools {
         UserFactory.fillUserAttributes(user, args);
         out = GSON.toJson(user);
 
+        stmt.close();
         Conexion.closeSession();
 
         return out;
     }
 
-    public static String getPhoto(String username)
-            throws InvalidInputType, SQLException, TooManyArgumentsException {
+    public static String getPhoto(String username) throws InvalidInputType, SQLException, TooManyArgumentsException {
         UserFactory.createUser(username, null, UserType.SUSCRIPTOR);
         Conexion.createSession();
 
@@ -110,6 +114,7 @@ public class UserGetter extends AccesorTools {
         if (res.next())
             return res.getString(1);
 
+        stmt.close();
         Conexion.closeSession();
 
         return null;
