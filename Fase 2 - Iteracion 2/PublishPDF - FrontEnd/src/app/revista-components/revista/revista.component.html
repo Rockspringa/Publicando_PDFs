@@ -3,9 +3,9 @@
 
     <!-- Zona de visualizacion de numeros -->
     <div class="wrapper" *ngIf="revista.numeros != 0">
-        <iframe src="" frameborder="1"></iframe>
+        <iframe [src]="getUrl()" frameborder="1"></iframe>
         <div class="numbers">
-            <a href="#" class="number" *ngFor="let i of indexes">i</a>
+            <button (click)="setIndex(i)" class="number btn btn-light" *ngFor="let i of indexes">{{ i }}</button>
         </div>
     </div>
 

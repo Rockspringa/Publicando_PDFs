@@ -35,10 +35,10 @@ export class SignUpComponent implements OnInit {
     this.formSignUp = this.formBuilder.group({
       username: ['', [Validators.pattern("^[\\w ]{1,40}$"), Validators.required]],
       password: ['', [Validators.pattern("^[\\w ]{1,40}$"), Validators.required]],
-      nombre: ['', [Validators.pattern("^[\\w ]{1,40}$")]],
-      descripcion: ['', [Validators.pattern("^[\\w ]{1,150}$")]],
-      gustos: ['', [Validators.pattern("^[\\w ]{1,150}$")]],
-      hobbies: ['', [Validators.pattern("^[\\w ]{1,150}$")]],
+      nombre: ['', [Validators.pattern("^[\\w ]{0,40}$")]],
+      descripcion: ['', [Validators.pattern("^[\\w ]{0,150}$")]],
+      gustos: ['', [Validators.pattern("^[\\w ]{0,150}$")]],
+      hobbies: ['', [Validators.pattern("^[\\w ]{0,150}$")]],
       tipo: [null, [Validators.required]]
     });
   }

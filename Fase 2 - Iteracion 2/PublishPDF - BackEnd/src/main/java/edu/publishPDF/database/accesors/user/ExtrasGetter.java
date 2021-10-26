@@ -13,6 +13,7 @@ public class ExtrasGetter extends AccesorTools {
     
     private static final String TAGS = "SELECT nombre FROM ETIQUETA";
     private static final String USER_TAGS = "SELECT etiqueta FROM ETIQUETAS_SUSCRIPTOR WHERE suscriptor = ?";
+    //private static final String REVISTA_TAGS = "SELECT etiqueta FROM ETIQUETAS_REVISTA WHERE revista = ?";
 
     private static List<String> getAllTags() throws SQLException {
         List<String> tags = new ArrayList<>();
@@ -55,4 +56,16 @@ public class ExtrasGetter extends AccesorTools {
 
         return GSON.toJson(conj);
     }
+
+    public static String getAllTagsPublic() throws SQLException {
+        List<String> tags = new ArrayList<>();
+        
+        Conexion.createSession();
+
+        tags = getAllTags();
+        Conexion.closeSession();
+
+        return GSON.toJson(tags);
+    }
+
 }

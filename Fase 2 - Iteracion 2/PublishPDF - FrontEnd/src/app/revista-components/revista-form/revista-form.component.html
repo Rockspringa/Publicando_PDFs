@@ -20,21 +20,32 @@
         <!-- Input de descripcion -->
         <div class="form-group">
             <label for="desc" class="text-info">Descripcion de la revista</label>
-            <input id="desc" [ngClass]="inputs(this.formRevista.controls.descripcion)" type="text"
-                formControlName="descripcion">
+            <textarea formControlName="descripcion" [ngClass]="inputs(this.formRevista.controls.descripcion)" id="desc"
+                rows="3" maxlength="150"></textarea>
         </div>
 
         <!-- Input de fecha -->
         <div class="form-group">
             <label for="fecha" class="text-info req">Fecha de publicacion</label>
-            <input id="fecha" [ngClass]="inputs(this.formRevista.controls.fecha)" type="date" formControlName="fecha">
+            <input id="fecha" [ngClass]="inputs(this.formRevista.controls.fechaPublicacion)" type="date"
+                formControlName="fechaPublicacion">
         </div>
 
         <!-- Input de categoria -->
         <div class="form-group">
             <label for="cate" class="text-info req">Categoria de la revista</label>
-            <input id="cate" [ngClass]="inputs(this.formRevista.controls.categoria)" type="text"
-                formControlName="categoria">
+            <select [ngClass]="selects(this.formRevista.controls.categoria)" formControlName="categoria">
+                <option [value]="null" disabled selected>Selecciones una categoria</option>
+                <option [ngClass]="selects(this.formRevista.controls.categoria)" *ngFor="let opt of categorias"
+                    [value]="opt">{{ opt }}</option>
+            </select>
+        </div>
+
+        <!-- Input de categoria -->
+        <div class="form-group">
+            <label for="coste" class="text-info req">Coste Mensual</label>
+            <input id="coste" [ngClass]="inputs(this.formRevista.controls.costeMes)" type="number"
+                formControlName="costeMes">
         </div>
 
         <!-- Boton de submit -->
@@ -44,5 +55,7 @@
         </div>
 
     </form>
-    <app-numero-form [ngClass]="num"></app-numero-form>
+    <app-etiquetas-select (tagsChanges)="changeTags($event)" [seleccionar]="true" [nueva]="true">
+    </app-etiquetas-select>
+    <app-numero-form [user]="user" [revista]="revista" [ngClass]="num"></app-numero-form>
 </div>

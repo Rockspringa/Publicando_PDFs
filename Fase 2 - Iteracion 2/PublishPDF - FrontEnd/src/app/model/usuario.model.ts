@@ -6,7 +6,7 @@ export class Usuario {
     private _gustos: string | null = null;
     private _hobbies: string | null = null;
     private _foto: string | null = null;
-    static readonly url_foto: string | null = "http://localhost:8080/PublishPDF/usuario/archivos/";
+    static readonly url_foto: string | null = "http://localhost:8080/PublishPDF/usuario/photo/";
 
     constructor(user: string, pass: string) {
         this._username = user;

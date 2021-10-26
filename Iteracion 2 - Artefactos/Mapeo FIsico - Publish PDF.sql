@@ -90,7 +90,7 @@ CREATE TABLE NUMERO_REVISTA (
     revista INT,
     archivo VARCHAR(40) NOT NULL,
 
-    CONSTRAINT PK_NUMERO PRIMARY KEY (numero_id),
+    CONSTRAINT PK_NUMERO PRIMARY KEY (numero_id, revista),
     CONSTRAINT FK_NUMERO_TO_REVISTA FOREIGN KEY (revista) REFERENCES REVISTA (revista_id)
 );
 
@@ -188,7 +188,7 @@ INSERT INTO EDITOR VALUES ('tmp_edi');
 INSERT INTO ADMINISTRADOR VALUES ('tmp_adm');
 
 INSERT INTO CATEGORIA VALUES ('Cientifica'), ('Relatos'), ('Comic');
-INSERT INTO REVISTA (editor, nombre, fecha_publicada, categoria, descripcion)
+INSERT INTO REVISTA (editor, nombre, fecha_publicada, categoria, coste_mes, descripcion)
 	VALUES ('tmp_edi', 'Investigacion...', '2021-10-22', 'Cientifica', 9.99, 'Investigacion sobre muchas cosas cientificas.'),
 	('tmp_edi', 'Cuentos del hoy', '2021-09-28', 'Relatos', 12.35, 'Revista en la cual se publican distintos cuentos actuales.'),
     ('tmp_edi', 'Ultimate Spiderman', '2021-07-10', 'Comic', 0, 'Comic del superheroe spiderman.'),

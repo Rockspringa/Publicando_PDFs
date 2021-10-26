@@ -22,7 +22,7 @@ public class FilePartGetter {
 
     private void setPath() throws InvalidInputType {
         this.path = "";
-        if (data.length < 4 && data.length > 1) {
+        if (data.length == 3 || data.length == 2) {
             for (int i = 1; i < data.length; i++) {
                 this.path += data[i] + "/";
             }

@@ -58,3 +58,7 @@ iframe {
     display: flex;
     flex-direction: row;
 }
+
+.numbers {
+    overflow-x: auto;
+}

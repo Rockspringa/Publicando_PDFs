@@ -1,4 +1,4 @@
-import { RadioClasses, ButtonClasses, InputClasses } from './../../model/html/form-classes.model';
+import { RadioClasses, ButtonClasses, InputClasses, SelectClasses } from './../../model/html/form-classes.model';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable, Output, EventEmitter } from '@angular/core';
@@ -61,6 +61,15 @@ export class VariablesService {
   getUserLogged(): Suscriptor | Editor | Administrador {
     let userJson: string = localStorage.getItem('usuario') || "{}";
     return this.getUserFromJson(JSON.parse(userJson));
+  }
+
+  getSelectClasses(input: any): string {
+    if (input.pristine)
+      return SelectClasses.DEFAULT;
+    else if (input.invalid)
+      return SelectClasses.ERROR;
+    else
+      return SelectClasses.VALID;
   }
 
   getRadioClasses(input: any): string {

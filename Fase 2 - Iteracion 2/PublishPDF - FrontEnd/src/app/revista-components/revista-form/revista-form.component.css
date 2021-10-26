@@ -11,6 +11,10 @@
     width: 40%;
 }
 
+.form-group input, .form-group select, .form-group textarea {
+    width: 60%;
+}
+
 .center {
     text-align: center;
 }

@@ -9,6 +9,7 @@ import { Component, OnInit } from '@angular/core';
 import { Suscripcion } from 'src/app/model/revista/suscripcion.model';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ComentariosService } from 'src/app/services/comentarios/comentarios.service';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-revista',
@@ -17,16 +18,19 @@ import { ComentariosService } from 'src/app/services/comentarios/comentarios.ser
 })
 export class RevistaComponent implements OnInit {
 
+  trustedUrl: any;
   suscribirse: boolean = false;
   cambio: number = 0;
   like: string = "der btn btn-secondary";
   readonly link = "/suscriptor/suscribirse";
+  readonly linkPdf = "http://localhost:8080/PublishPDF/revista/archivo/?revista=";
   readonly linkProfile = "/suscriptor/profile";
 
   inputs!: Function;
   button!: Function;
   formComentar!: FormGroup;
 
+  index: number = 1;
   suscripcion!: Suscripcion;
   user!: Suscriptor;
   revista: Revista = {
@@ -39,8 +43,8 @@ export class RevistaComponent implements OnInit {
   indexes: number[] = [];
 
   constructor(private functions: VariablesService, private suscripcionService: SuscripcionService,
-    private route: ActivatedRoute, private formBuilder: FormBuilder,
-    private comentariosService: ComentariosService, private router: Router) {
+      private route: ActivatedRoute, private formBuilder: FormBuilder, private sanitizer: DomSanitizer,
+      private comentariosService: ComentariosService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -128,6 +132,16 @@ export class RevistaComponent implements OnInit {
 
   redirect(): void {
     this.router.navigate([ '/suscriptor/suscribirse', this.revista.id ])
+  }
+
+  setIndex(i: number): void {
+    this.index = i;
+  }
+
+  getUrl(): SafeResourceUrl {
+    this.trustedUrl = this.sanitizer
+        .bypassSecurityTrustResourceUrl(this.linkPdf + this.revista.id + '&numero=' + this.index);
+    return this.trustedUrl;
   }
 
 }

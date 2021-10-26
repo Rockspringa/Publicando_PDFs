@@ -23,7 +23,7 @@ public class Revista {
     private Boolean suscripcionesActivas = true;
 
     private Revista(int id, String editor, LocalDate fechaPublicacion, String nombre, String categoria, double costeMes,
-            String descripcion, Boolean comentariosActivos, Boolean meGustasActivos, boolean suscripcionesActivas) {
+            String descripcion, Boolean comentariosActivos, Boolean meGustasActivos, Boolean suscripcionesActivas) {
         this.id = id;
         this.editor = editor;
         this.fechaPublicacion = fechaPublicacion;
@@ -45,8 +45,8 @@ public class Revista {
     }
 
     public static Revista createRevista(int id, String editor, LocalDate fechaPublicacion, String nombre,
-            double costeMes, String categoria, String descripcion, boolean comentariosActivos, boolean meGustasActivos,
-            boolean suscripcionesActivas) throws InvalidInputType {
+            double costeMes, String categoria, String descripcion, Boolean comentariosActivos, Boolean meGustasActivos,
+            Boolean suscripcionesActivas) throws InvalidInputType {
 
         int numValido = (InputValidator.isUnsignedInt(id)) ? 1 : 0;
         numValido += (InputValidator.isValidText(editor)) ? 1 : 0;
@@ -134,27 +134,27 @@ public class Revista {
         this.descripcion = descripcion;
     }
 
-    public boolean isComentariosActivos() {
+    public Boolean isComentariosActivos() {
         return this.comentariosActivos;
     }
 
-    public void setComentariosActivos(boolean comentariosActivos) {
+    public void setComentariosActivos(Boolean comentariosActivos) {
         this.comentariosActivos = comentariosActivos;
     }
 
-    public boolean isMeGustasActivos() {
+    public Boolean isMeGustasActivos() {
         return this.meGustasActivos;
     }
 
-    public void setMeGustasActivos(boolean meGustasActivos) {
+    public void setMeGustasActivos(Boolean meGustasActivos) {
         this.meGustasActivos = meGustasActivos;
     }
 
-    public boolean isSuscripcionesActivas() {
+    public Boolean isSuscripcionesActivas() {
         return this.suscripcionesActivas;
     }
 
-    public void setSuscripcionesActivas(boolean suscripcionesActivas) {
+    public void setSuscripcionesActivas(Boolean suscripcionesActivas) {
         this.suscripcionesActivas = suscripcionesActivas;
     }
 

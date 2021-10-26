@@ -30,8 +30,8 @@ export class NumeroFormComponent implements OnInit {
         const extension = filename[filename.length - 1];
   
         if (extension === 'pdf') {
-          pdfData.append('file', this.file, this.revista.nombre + "_1." + extension);
-          this.revistasService.postFile(pdfData, this.user, this.revista).subscribe(
+          pdfData.append('file', this.file, this.revista.nombre + "." + extension);
+          this.revistasService.postNumeroWithoutId(pdfData).subscribe(
             (value: void) => {
               alert('Se ha publicado con exito el nuevo numero');
             }, (error: HttpErrorResponse) => {

@@ -15,8 +15,8 @@
 .form-group {
     display: flex;
     flex-direction: row;
-    height: 60%;
     padding: 10em auto;
+    margin: auto;
 }
 
 .form-group > label {

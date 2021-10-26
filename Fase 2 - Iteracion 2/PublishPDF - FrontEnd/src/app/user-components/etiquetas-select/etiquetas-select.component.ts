@@ -1,3 +1,5 @@
+import { RevistasService } from './../../services/revistas/revistas.service';
+import { Editor } from 'src/app/model/users/editor.model';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Suscriptor } from 'src/app/model/users/suscriptor.model';
 import { UsuarioService } from './../../services/users/usuario.service';
@@ -13,12 +15,13 @@ export class EtiquetasSelectComponent implements OnInit, OnChanges {
 
   @Output() tagsChanges = new EventEmitter<string[]>();
   @Input() seleccionar: boolean = false;
-  
+  @Input() nueva!: boolean;
   tagsEscogidas: string[] = [];
   noEscogidas: string[] = [];
   tags: string[] = [];
 
-  constructor(private functions: VariablesService, private usuarioService: UsuarioService) { }
+  constructor(private functions: VariablesService, private usuarioService: UsuarioService,
+      private revistasService: RevistasService) { }
 
   ngOnInit(): void {
     const user = this.functions.getUserLogged();
@@ -28,6 +31,15 @@ export class EtiquetasSelectComponent implements OnInit, OnChanges {
         (tags: string[][]) => {
           this.tags = tags[0];
           this.tagsEscogidas = tags[1];
+          this.noEscogidas = this.tags.filter(tag => !this.tagsEscogidas.includes(tag));
+        }, (error: HttpErrorResponse) => {
+          console.log(error);
+        }
+      )
+    } else if (this.nueva && user instanceof Editor) {
+      this.revistasService.findAllTags().subscribe(
+        (tags: string[]) => {
+          this.tags = tags;
           this.noEscogidas = this.tags.filter(tag => !this.tagsEscogidas.includes(tag));
         }, (error: HttpErrorResponse) => {
           console.log(error);

@@ -7,7 +7,7 @@ export interface Revista {
     costeMes?: number;
     descripcion?: string;
     numeros?: number;
-    etiquetas?: [];
+    etiquetas?: string[];
     meGustas?: number;
     
     comentariosActivos?: boolean;
