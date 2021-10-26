@@ -1,3 +1,6 @@
+import { HttpErrorResponse } from '@angular/common/http';
+import { AnunciosService } from './../../services/anuncios/anuncios.service';
+import { Anuncio } from './../../model/anuncio/anuncio.model';
 import { VariablesService } from './../../services/global/variables.service';
 import { Administrador } from 'src/app/model/users/admin.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -23,7 +26,8 @@ export class AnuncioFormComponent implements OnInit {
 
   readonly types = AnuncioType;
 
-  constructor(private formBuilder: FormBuilder, private functions: VariablesService) { }
+  constructor(private formBuilder: FormBuilder, private functions: VariablesService,
+        private anunciosService: AnunciosService) { }
 
   ngOnInit(): void {
     if (this.functions.user instanceof Administrador)
@@ -41,7 +45,12 @@ export class AnuncioFormComponent implements OnInit {
   }
 
   subirAnuncio() {
+    const anuncio: Anuncio = this.formAnuncio.value;
 
+    this.anunciosService.create(anuncio).subscribe(
+      (creado: boolean) => alert('Anuncio creado con exito.'),
+      (error: HttpErrorResponse) => console.log(error)
+    );
   }
-  
+
 }

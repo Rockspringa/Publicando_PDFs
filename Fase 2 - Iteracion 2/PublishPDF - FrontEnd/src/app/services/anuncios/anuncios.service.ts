@@ -17,4 +17,8 @@ export class AnunciosService {
         { params: new HttpParams().append('user', username) });
   }
 
+  create(anuncio: Anuncio): Observable<boolean> {
+    return this.http.post<boolean>(`${this.serverUrl}/`, anuncio);
+  }
+
 }
